@@ -80,11 +80,11 @@ public class ControladorRestPartidos {
     }
 
     @RequestMapping("/getUltimoPartidoByClubAndCampeonato")
-    public PartidoVO getUltimoPartidoByClubAndCampeonato(@RequestBody ClubVO club,
-                                                         @RequestBody CampeonatoVO campeonato,
+    public PartidoVO getUltimoPartidoByClubAndCampeonato(@RequestParam(name = "idClub") Integer idClub,
+                                                         @RequestParam(name = "idCampeonato") Integer idCampeonato,
                                                          @RequestParam(name = "nroFechaActual") int nroFechaActual) {
 
-        return ControladorPartidos.getInstancia().getUltimoPartidoByClubAndCampeonato(club.toModelo(), campeonato.toModelo(), nroFechaActual).toVO();
+        return ControladorPartidos.getInstancia().getUltimoPartidoByClubAndCampeonato(idClub, idCampeonato, nroFechaActual).toVO();
     }
 
     @RequestMapping("/getPartidosByNroZona")
