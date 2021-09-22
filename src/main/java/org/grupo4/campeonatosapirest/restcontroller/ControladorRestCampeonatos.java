@@ -63,7 +63,7 @@ public class ControladorRestCampeonatos {
     }
 
     @RequestMapping("/getCampeonatosByClub")
-    public List<CampeonatoVO> getCampeonatosByClub (@RequestParam(name="idClub") Integer idClub){
+    public List<CampeonatoVO> getCampeonatosByClub(@RequestParam(name = "idClub") Integer idClub) {
         List<Campeonato> lista = ControladorCampeonatos.getInstancia().getCampeonatosByClub(idClub);
         List<CampeonatoVO> result = null;
         for (Campeonato camp : lista) {
