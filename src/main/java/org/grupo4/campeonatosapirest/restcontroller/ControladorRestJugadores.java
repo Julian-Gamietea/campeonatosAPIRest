@@ -81,7 +81,7 @@ public class ControladorRestJugadores {
 
     @RequestMapping("/getJugadoresHabilitadosByClubAndCategoria")
     public List<JugadorVO> getJugadoresHabilitadosByClubAndCategoria(@RequestParam(name = "idClub") Integer idClub, @RequestParam(name = "categoria") int categoria) {
-        List<Jugador> jugadores = ControladorJugadores.getInstancia().getJugadoresHabilitadosCategoriaClub(idClub, categoria)
+        List<Jugador> jugadores = ControladorJugadores.getInstancia().getJugadoresHabilitadosCategoriaClub(idClub, categoria);
         List<JugadorVO> jugadoresVO = Collections.emptyList();
         for (Jugador jugador : jugadores) {
             jugadoresVO.add(jugador.toVO());

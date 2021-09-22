@@ -3,8 +3,10 @@ package org.grupo4.campeonatosapirest.restcontroller;
 import org.grupocuatro.controlador.ControladorCampeonatos;
 import org.grupocuatro.modelo.Campeonato;
 import org.grupocuatro.vo.CampeonatoVO;
+import org.grupocuatro.vo.ClubesCampeonatoVO;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.ldap.Control;
 import java.util.List;
 
 @RestController
@@ -54,5 +56,19 @@ public class ControladorRestCampeonatos {
         return result;
     }
 
+    @PostMapping("/agregarClubACampeonato")
+    public void agregarClubACampeonato(@RequestBody ClubesCampeonatoVO clubCampeonato) {
+        //Aclaracion: como el atributo de idClub de club campeonato guarda la instancia del club en lugar de solo el id, es por eso que se llama al getId del club para obtener el Integer, lo mismo ocurre con el campeonato
+        ControladorCampeonatos.getInstancia().agregarClubACampeonato(clubCampeonato.getIdClub().getIdClub(), clubCampeonato.getIdCampeonato().getIdCampeonato());
+    }
 
+    @RequestMapping("/getCampeonatosByClub")
+    public List<CampeonatoVO> getCampeonatosByClub (@RequestParam(name="idClub") Integer idClub){
+        List<Campeonato> lista = ControladorCampeonatos.getInstancia().getCampeonatosByClub(idClub);
+        List<CampeonatoVO> result = null;
+        for (Campeonato camp : lista) {
+            result.add(camp.toVO());
+        }
+        return result;
+    }
 }
