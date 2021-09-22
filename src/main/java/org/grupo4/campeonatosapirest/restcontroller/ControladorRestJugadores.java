@@ -37,6 +37,11 @@ public class ControladorRestJugadores {
         ControladorJugadores.getInstancia().modificarEstado(idJugador);
     }
 
+    @RequestMapping("/encontrarJugador")
+    public JugadorVO encontrarJugador(@RequestParam(name = "idJugador") Integer idJugador) {
+        return ControladorJugadores.getInstancia().encontrarJugador(idJugador).toVO();
+    }
+
     @RequestMapping("/getStatsByCampeonato")
     public void getStatsByCampeonato(@RequestParam(name = "idJugador") Integer idJugador, @RequestParam(name = "idCampeonato") Integer idCampeonato) {
         ControladorJugadores.getInstancia().getStatsByCampeonato(idJugador, idCampeonato);
@@ -67,7 +72,6 @@ public class ControladorRestJugadores {
         return jugadoresVO;
     }
 
-
     @RequestMapping("/getJugadoresByCategoria")
     public List<JugadorVO> getJugadoresByCategoria(@RequestParam(name = "categoria") int categoria) {
         List<Jugador> jugadores = ControladorJugadores.getInstancia().getJugadoresByCategoria(categoria);
@@ -77,7 +81,6 @@ public class ControladorRestJugadores {
         }
         return jugadoresVO;
     }
-
 
     @RequestMapping("/getJugadoresHabilitadosByClubAndCategoria")
     public List<JugadorVO> getJugadoresHabilitadosByClubAndCategoria(@RequestParam(name = "idClub") Integer idClub, @RequestParam(name = "categoria") int categoria) {
@@ -89,13 +92,10 @@ public class ControladorRestJugadores {
         return jugadoresVO;
     }
 
-
-
     @RequestMapping("/getJugadorByDocumento")
     public JugadorVO getJugadorByDocumento(@RequestParam(name = "documento") Integer documento, @RequestParam(name = "tipoDoc") String tipoDoc) {
         return ControladorJugadores.getInstancia().getJugadorByDocumento(documento, tipoDoc).toVO();
     }
-
 
     @RequestMapping("/getJugadorByNombre")
     public List<JugadorVO> getJugadorByNombre(@RequestParam(name = "nombre") String nombre, @RequestParam(name = "apellido") String apellido) {
@@ -106,8 +106,6 @@ public class ControladorRestJugadores {
         }
         return jugadoresVO;
     }
-
-
 
 
 }
