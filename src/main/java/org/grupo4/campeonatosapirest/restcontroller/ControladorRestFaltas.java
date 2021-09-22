@@ -107,7 +107,8 @@ public class ControladorRestFaltas {
                                                                           @RequestParam(name = "idPartido") Integer idPartido,
                                                                           @RequestParam(name = "tipo") String tipo,
                                                                           @RequestParam(name = "idCampeonato") Integer idCampeonato) {
-        List<Falta> lista = ControladorFaltas.getInstancia().getFaltasByJugadorAndPartidoAndTipoAndCampeonato(idJugador, idPartido, tipo, idCampeonato);
+
+        List<Falta> lista = ControladorFaltas.getInstancia().getFaltasByJugadorAndPartidoAndTipo(idJugador, idPartido, tipo);
         List<FaltaVO> result = null;
         for (Falta falta : lista) {
             result.add(falta.toVO());
