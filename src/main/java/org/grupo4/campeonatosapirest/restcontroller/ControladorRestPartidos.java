@@ -1,6 +1,10 @@
 package org.grupo4.campeonatosapirest.restcontroller;
 
+import org.grupocuatro.controlador.ControladorCampeonatos;
+import org.grupocuatro.controlador.ControladorClubes;
 import org.grupocuatro.controlador.ControladorPartidos;
+import org.grupocuatro.modelo.Campeonato;
+import org.grupocuatro.modelo.Club;
 import org.grupocuatro.modelo.Partido;
 import org.grupocuatro.vo.CampeonatoVO;
 import org.grupocuatro.vo.ClubVO;
@@ -83,8 +87,9 @@ public class ControladorRestPartidos {
     public PartidoVO getUltimoPartidoByClubAndCampeonato(@RequestParam(name = "idClub") Integer idClub,
                                                          @RequestParam(name = "idCampeonato") Integer idCampeonato,
                                                          @RequestParam(name = "nroFechaActual") int nroFechaActual) {
-
-        return ControladorPartidos.getInstancia().getUltimoPartidoByClubAndCampeonato(idClub, idCampeonato, nroFechaActual).toVO();
+        Club club = ControladorClubes.getInstancia().getClubById(idClub);
+        Campeonato campeonato = ControladorCampeonatos.getInstancia().encontrarCampeonato(idCampeonato);
+        return ControladorPartidos.getInstancia().getUltimoPartidoByClubAndCampeonato(club, campeonato, nroFechaActual).toVO();
     }
 
     @RequestMapping("/getPartidosByNroZona")

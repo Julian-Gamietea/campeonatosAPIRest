@@ -2,12 +2,17 @@ package org.grupo4.campeonatosapirest.restcontroller;
 
 import org.grupocuatro.modelo.*;
 import org.grupocuatro.controlador.*;
+import org.grupocuatro.vo.ClubVO;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class ControladorRestClubes {
+
     @PostMapping("/crearClub")
-    public void crearClub(@RequestBody Club club) {
+    public void crearClub(@RequestBody ClubVO club) {
         ControladorClubes.getInstancia().crearClub(club.getIdClub(), club.getNombre(), club.getDireccion());
     }
 
@@ -19,20 +24,43 @@ public class ControladorRestClubes {
     }
 
     @RequestMapping("/getClubById")
-    public void getClubById(@RequestParam(name = "idClub") Integer idClub ){
-        ControladorClubes.getInstancia().getClubById(idClub);
+    public ClubVO getClubById(@RequestParam(name = "idClub") Integer idClub ){
+        return ControladorClubes.getInstancia().getClubById(idClub).toVO();
     }
     @RequestMapping("/getClubes")
-    public void getClubes(){
-        ControladorClubes.getInstancia().getClubes();
+    public List<ClubVO> getClubes(){
+        List<Club> clubes = ControladorClubes.getInstancia().getClubes();
+        List<ClubVO> clubesVOS = new ArrayList<>();
+
+        for (Club c: clubes) {
+            clubesVOS.add(c.toVO());
+        }
+
+        return clubesVOS;
     }
-    @RequestMapping("/getClubByCampeonato")
-    public void getClubByCampeonato(@RequestBody Campeonato campeonato){
-        ControladorClubes.getInstancia().getClubesByCampeonato(campeonato.getIdCampeonato());
+
+    @RequestMapping("/getClubesByCampeonato")
+    public List<ClubVO> getClubesByCampeonato(@RequestBody Campeonato campeonato){
+        List<Club> clubes = ControladorClubes.getInstancia().getClubesByCampeonato(campeonato.getIdCampeonato());
+        List<ClubVO> clubesVOS = new ArrayList<>();
+
+        for(Club c: clubes) {
+            clubesVOS.add(c.toVO());
+        }
+
+        return clubesVOS;
     }
+
     @RequestMapping("/getClubesHabiltadosPorCategoria")
-    public void getClubesHabiltadosPorCategoria(@RequestParam(name = "Categoria") int categoria){
-        ControladorClubes.getInstancia().getClubesHabiltadosPorCategoria(categoria);
+    public List<ClubVO> getClubesHabiltadosPorCategoria(@RequestParam(name = "categoria") int categoria){
+        List<Club> clubes =  ControladorClubes.getInstancia().getClubesHabiltadosPorCategoria(categoria);
+        List<ClubVO> clubesVOS = new ArrayList<>();
+
+        for(Club c: clubes) {
+            clubesVOS.add(c.toVO());
+        }
+
+        return clubesVOS;
     }
 
 
