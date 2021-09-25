@@ -12,8 +12,11 @@ import java.util.List;
 public class ControladorRestFaltas {
 
     @PostMapping("/cargarFalta")
-    public void cargarFalta(@RequestBody FaltaVO falta) {
-        ControladorFaltas.getInstancia().cargarFalta(falta.getJugador().getIdJugador(), falta.getPartido().getIdPartido(), falta.getMinuto(), falta.getTipo());
+    public void cargarFalta(@RequestParam (name = "idJugador") Integer idJugador,
+                            @RequestParam (name = "idPartido") Integer idPartido,
+                            @RequestParam (name = "minuto") Integer minuto,
+                            @RequestParam (name = "tipo") String tipo) {
+        ControladorFaltas.getInstancia().cargarFalta(idJugador, idPartido, minuto, tipo);
     }
 
     @RequestMapping("/getFaltas")
