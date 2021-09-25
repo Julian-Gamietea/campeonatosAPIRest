@@ -38,7 +38,12 @@ public class ControladorRestMiembros {
 
     @RequestMapping("/getMiembroById")
     public MiembroVO getMiembroById(@RequestParam(name = "idMiembro") Integer idMiembro) {
-        return ControladorMiembros.getInstancia().getMiembroById(idMiembro).toVO();
+        MiembroVO miembro = ControladorMiembros.getInstancia().getMiembroById(idMiembro).toVO();
+        if (miembro == null)
+            return new MiembroVO();
+        else {
+            return miembro;
+        }
     }
 
     @RequestMapping("/getMiembrosByClub")
@@ -67,14 +72,26 @@ public class ControladorRestMiembros {
     @RequestMapping("/getMiembroByPartidoAndJugador")
     public MiembroVO getMiembroByPartidoAndJugador(@RequestParam(name = "idPartido") Integer idPartido,
                                                    @RequestParam(name = "idJugador") Integer idJugador) {
-        return ControladorMiembros.getInstancia().getMiembroByPartidoAndJugador(idPartido, idJugador).toVO();
+
+        MiembroVO miembro = ControladorMiembros.getInstancia().getMiembroByPartidoAndJugador(idPartido, idJugador).toVO();
+        if (miembro == null)
+            return new MiembroVO();
+        else {
+            return miembro;
+        }
     }
 
     @RequestMapping("/getMiembroByClubAndPartidoAndJugador")
     public MiembroVO getMiembroByClubAndPartidoAndJugador(@RequestParam(name = "idClub") Integer idClub,
                                                           @RequestParam(name = "idPartido") Integer idPartido,
                                                           @RequestParam(name = "idJugador") Integer idJugador) {
-        return ControladorMiembros.getInstancia().getMiembroByClubAndPartidoAndJugador(idClub, idPartido, idJugador).toVO();
+
+        MiembroVO miembro = ControladorMiembros.getInstancia().getMiembroByClubAndPartidoAndJugador(idClub, idPartido, idJugador).toVO();
+        if (miembro == null)
+            return new MiembroVO();
+        else {
+            return miembro;
+        }
     }
 
     @RequestMapping("/getMiembroByJugadorAndFecha")

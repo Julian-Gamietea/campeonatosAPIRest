@@ -63,7 +63,12 @@ public class ControladorRestPartidos {
 
     @RequestMapping("/encontrarPartido")
     public PartidoVO encontrarPartido(@RequestParam(name = "idPartido") Integer idPartido) {
-        return ControladorPartidos.getInstancia().encontrarPartido(idPartido).toVO();
+        PartidoVO partido = ControladorPartidos.getInstancia().encontrarPartido(idPartido).toVO();
+        if (partido == null)
+            return new PartidoVO();
+        else {
+            return partido;
+        }
     }
 
     @RequestMapping("/getAllPartidos")
@@ -90,7 +95,12 @@ public class ControladorRestPartidos {
                                                          @RequestParam(name = "nroFechaActual") int nroFechaActual) {
         Club club = ControladorClubes.getInstancia().getClubById(idClub);
         Campeonato campeonato = ControladorCampeonatos.getInstancia().encontrarCampeonato(idCampeonato);
-        return ControladorPartidos.getInstancia().getUltimoPartidoByClubAndCampeonato(club.getIdClub(), campeonato.getIdCampeonato(), nroFechaActual).toVO();
+        PartidoVO partido = ControladorPartidos.getInstancia().getUltimoPartidoByClubAndCampeonato(club.getIdClub(), campeonato.getIdCampeonato(), nroFechaActual).toVO();
+        if (partido == null)
+            return new PartidoVO();
+        else {
+            return partido;
+        }
     }
 
     @RequestMapping("/getPartidosByNroZona")

@@ -33,14 +33,19 @@ public class ControladorRestJugadores {
         ControladorJugadores.getInstancia().modificarTelefono(idJugador, telefono);
     }
 
-    @RequestMapping("/modificarEstado")
+    @PostMapping("/modificarEstado")
     public void modificarEstado(@RequestParam(name = "idJugador") Integer idJugador) {
         ControladorJugadores.getInstancia().modificarEstado(idJugador);
     }
 
     @RequestMapping("/encontrarJugador")
     public JugadorVO encontrarJugador(@RequestParam(name = "idJugador") Integer idJugador) {
-        return ControladorJugadores.getInstancia().encontrarJugador(idJugador).toVO();
+        JugadorVO jugador = ControladorJugadores.getInstancia().encontrarJugador(idJugador).toVO();
+        if (jugador == null)
+            return new JugadorVO();
+        else {
+            return jugador;
+        }
     }
 
     @RequestMapping("/getStatsByCampeonato")
@@ -95,7 +100,12 @@ public class ControladorRestJugadores {
 
     @RequestMapping("/getJugadorByDocumento")
     public JugadorVO getJugadorByDocumento(@RequestParam(name = "documento") Integer documento, @RequestParam(name = "tipoDoc") String tipoDoc) {
-        return ControladorJugadores.getInstancia().getJugadorByDocumento(documento, tipoDoc).toVO();
+        JugadorVO jugador = ControladorJugadores.getInstancia().getJugadorByDocumento(documento, tipoDoc).toVO();
+        if (jugador == null)
+            return new JugadorVO();
+        else {
+            return jugador;
+        }
     }
 
     @RequestMapping("/getJugadorByNombre")
