@@ -27,7 +27,8 @@ public class ControladorRestResponsables {
 
     @RequestMapping("/getResponsableById")
     public ResponsableVO getResponsableById(@RequestParam(name = "idResponsable") Integer idResponsable) {
-        return ControladorResponsables.getInstancia().getResponsable(idResponsable).toVO();
+        ResponsableVO responsable = ControladorResponsables.getInstancia().getResponsable(idResponsable).toVO();
+        return (responsable == null) ? new ResponsableVO() : responsable;
     }
 
     @RequestMapping("/getResponsables")
@@ -42,7 +43,8 @@ public class ControladorRestResponsables {
     @RequestMapping("/getResponsableByNroDocAndClub")
     public ResponsableVO getResponsableByNroDocAndClub(@RequestParam(name = "nroDoc") Integer nroDoc,
                                                        @RequestParam(name = "idClub") Integer idClub) {
-        return ControladorResponsables.getInstancia().getResponsableByNroDocAndClub(nroDoc, idClub).toVO();
+        ResponsableVO responsable = ControladorResponsables.getInstancia().getResponsableByNroDocAndClub(nroDoc, idClub).toVO();
+        return (responsable == null) ? new ResponsableVO() : responsable;
     }
 
     @RequestMapping("/getResponsablesByClub")

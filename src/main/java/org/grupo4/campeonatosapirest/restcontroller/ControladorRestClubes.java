@@ -25,7 +25,8 @@ public class ControladorRestClubes {
 
     @RequestMapping("/getClubById")
     public ClubVO getClubById(@RequestParam(name = "idClub") Integer idClub ){
-        return ControladorClubes.getInstancia().getClubById(idClub).toVO();
+        ClubVO club = ControladorClubes.getInstancia().getClubById(idClub).toVO();
+        return (club == null) ? new ClubVO() : club;
     }
     @RequestMapping("/getClubes")
     public List<ClubVO> getClubes(){
