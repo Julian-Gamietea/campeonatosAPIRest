@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.naming.ldap.Control;
 import java.sql.PreparedStatement;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,9 +19,13 @@ public class ControladorRestCampeonatos {
 
     @PostMapping("/crearCampeonato")
     public void crearCampeonato(@RequestParam(name = "descripcion") String descripcion,
-                                @RequestParam(name = "fechaInicio") LocalDate fechaInicio,
-                                @RequestParam(name = "fechaFin") LocalDate fechaFin,
+                                @RequestParam(name = "fechaInicio") String fechaInicioString,
+                                @RequestParam(name = "fechaFin") String fechaFinString,
                                 @RequestParam(name = "estado") String estado) {
+
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/d");
+        LocalDate fechaInicio = LocalDate.parse(fechaInicioString, formato);
+        LocalDate fechaFin = LocalDate.parse(fechaFinString, formato);
         ControladorCampeonatos.getInstancia().crearCampeonato(descripcion, fechaInicio, fechaFin, estado);
     }
 
