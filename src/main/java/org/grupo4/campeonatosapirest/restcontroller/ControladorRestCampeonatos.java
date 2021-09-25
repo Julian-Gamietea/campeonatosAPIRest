@@ -7,15 +7,21 @@ import org.grupocuatro.vo.ClubesCampeonatoVO;
 import org.springframework.web.bind.annotation.*;
 
 import javax.naming.ldap.Control;
+import java.sql.PreparedStatement;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
 public class ControladorRestCampeonatos {
 
     @PostMapping("/crearCampeonato")
-    public void crearCampeonato(@RequestBody CampeonatoVO camp) {
-        ControladorCampeonatos.getInstancia().crearCampeonato(camp.getDescripcion(), camp.getFechaInicio(), camp.getFechaFin(), camp.getEstado());
+    public void crearCampeonato(@RequestParam(name = "descripcion") String descripcion,
+                                @RequestParam(name = "fechaInicio") LocalDate fechaInicio,
+                                @RequestParam(name = "fechaFin") LocalDate fechaFin,
+                                @RequestParam(name = "estado") String estado) {
+        ControladorCampeonatos.getInstancia().crearCampeonato(descripcion, fechaInicio, fechaFin, estado);
     }
 
     @PostMapping("/definirTipoCampeonatoAndCategoria")
@@ -61,9 +67,9 @@ public class ControladorRestCampeonatos {
     }
 
     @PostMapping("/agregarClubACampeonato")
-    public void agregarClubACampeonato(@RequestBody ClubesCampeonatoVO clubCampeonato) {
-        //Aclaracion: como el atributo de idClub de club campeonato guarda la instancia del club en lugar de solo el id, es por eso que se llama al getId del club para obtener el Integer, lo mismo ocurre con el campeonato
-        ControladorCampeonatos.getInstancia().agregarClubACampeonato(clubCampeonato.getIdClub().getIdClub(), clubCampeonato.getIdCampeonato().getIdCampeonato());
+    public void agregarClubACampeonato(@RequestParam(name = "idClub") Integer idClub ,
+                                       @RequestParam(name = "idCampeonato") Integer idCampeonato) {
+        ControladorCampeonatos.getInstancia().agregarClubACampeonato(idClub, idCampeonato);
     }
 
     @RequestMapping("/getCampeonatosByClub")
@@ -73,6 +79,7 @@ public class ControladorRestCampeonatos {
         for (Campeonato camp : lista) {
             result.add(camp.toVO());
         }
-        return result;
+        if (result.isEmpty()) return Collections.emptyList();
+        else return result;
     }
 }
