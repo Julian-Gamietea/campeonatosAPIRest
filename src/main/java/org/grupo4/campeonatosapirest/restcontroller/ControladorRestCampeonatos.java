@@ -34,7 +34,10 @@ public class ControladorRestCampeonatos {
 
     @RequestMapping("/encontrarCampeonato")
     public CampeonatoVO encontrarCampeonato(@RequestParam(name = "idCampeonato") Integer idCampeonato) {
-        return ControladorCampeonatos.getInstancia().encontrarCampeonato(idCampeonato).toVO();
+        CampeonatoVO result = ControladorCampeonatos.getInstancia().encontrarCampeonato(idCampeonato).toVO();
+        if (result != null)
+            return result;
+        return new CampeonatoVO();
     }
 
     @RequestMapping("/getCampeonatos")

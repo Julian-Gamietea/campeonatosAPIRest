@@ -29,7 +29,10 @@ public class ControladorRestFaltas {
 
     @RequestMapping("/getFaltaById")
     public FaltaVO getFaltaById(@RequestParam(name = "id") Integer id) {
-        return ControladorFaltas.getInstancia().getFaltaById(id).toVO();
+        FaltaVO result = ControladorFaltas.getInstancia().getFaltaById(id).toVO();
+        if (result != null)
+            return result;
+        return new FaltaVO();
     }
 
     @RequestMapping("/getFaltasPartido")

@@ -37,7 +37,10 @@ public class ControladorRestGoles {
 
     @RequestMapping("/getGolById")
     public GolVO getGolById(@RequestParam(name = "idGol") Integer idGol) {
-        return ControladorGoles.getInstancia().getGolById(idGol).toVO();
+        GolVO gol = ControladorGoles.getInstancia().getGolById(idGol).toVO();
+        if(gol != null)
+            return gol;
+        return new GolVO();
     }
 
     @RequestMapping("/getGolesByPartido")
