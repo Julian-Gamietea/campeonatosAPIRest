@@ -7,6 +7,7 @@ import org.grupocuatro.vo.MiembroVO;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,7 +28,7 @@ public class ControladorRestMiembros {
     @RequestMapping("/getMiembros")
     public List<MiembroVO> getMiembros() {
         List<Miembro> lista = ControladorMiembros.getInstancia().getMiembros();
-        List<MiembroVO> result = null;
+        List<MiembroVO> result = new ArrayList<>();
         for (Miembro miembro : lista) {
             result.add(miembro.toVO());
         }
@@ -43,7 +44,7 @@ public class ControladorRestMiembros {
     @RequestMapping("/getMiembrosByClub")
     public List<MiembroVO> getMiembrosByClub(@RequestParam(name = "idClub") Integer idClub) {
         List<Miembro> lista = ControladorMiembros.getInstancia().getMiembrosByClub(idClub);
-        List<MiembroVO> result = null;
+        List<MiembroVO> result = new ArrayList<>();
         for (Miembro miembro : lista) {
             result.add(miembro.toVO());
         }
@@ -55,7 +56,7 @@ public class ControladorRestMiembros {
     public List<MiembroVO> getMiembrosByClubAndPartido(@RequestParam(name = "idClub") Integer idClub,
                                                        @RequestParam(name = "idPartido") Integer idPartido) {
         List<Miembro> lista = ControladorMiembros.getInstancia().getMiembrosByClubAndPartido(idClub, idPartido);
-        List<MiembroVO> result = null;
+        List<MiembroVO> result = new ArrayList<>();
         for (Miembro miembro : lista) {
             result.add(miembro.toVO());
         }
@@ -80,7 +81,7 @@ public class ControladorRestMiembros {
     public List<MiembroVO> getMiembroByJugadorAndFecha(@RequestParam(name = "idJugador") Integer idJugador,
                                                        @RequestParam(name = "fecha") LocalDate fecha) {
         List<Miembro> lista = ControladorMiembros.getInstancia().getMiembroByJugadorAndFecha(idJugador,fecha);
-        List<MiembroVO> result = null;
+        List<MiembroVO> result = new ArrayList<>();
         for (Miembro miembro : lista) {
             result.add(miembro.toVO());
         }

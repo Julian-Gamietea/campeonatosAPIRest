@@ -7,6 +7,7 @@ import org.grupocuatro.vo.ClubesCampeonatoVO;
 import org.springframework.web.bind.annotation.*;
 
 import javax.naming.ldap.Control;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -39,7 +40,7 @@ public class ControladorRestCampeonatos {
     @RequestMapping("/getCampeonatos")
     public List<CampeonatoVO> getCampeonatos() {
         List<Campeonato> lista = ControladorCampeonatos.getInstancia().getCampeonatos();
-        List<CampeonatoVO> result = null;
+        List<CampeonatoVO> result = new ArrayList<>();
         for (Campeonato camp : lista) {
             result.add(camp.toVO());
         }
@@ -49,7 +50,7 @@ public class ControladorRestCampeonatos {
     @RequestMapping("/getCampeonatosByEstado")
     public List<CampeonatoVO> getCampeonatosByEstado(@RequestParam(name = "estado") String estado) {
         List<Campeonato> lista = ControladorCampeonatos.getInstancia().getCampeonatosByEstado(estado);
-        List<CampeonatoVO> result = null;
+        List<CampeonatoVO> result = new ArrayList<>();
         for (Campeonato camp : lista) {
             result.add(camp.toVO());
         }
@@ -65,7 +66,7 @@ public class ControladorRestCampeonatos {
     @RequestMapping("/getCampeonatosByClub")
     public List<CampeonatoVO> getCampeonatosByClub(@RequestParam(name = "idClub") Integer idClub) {
         List<Campeonato> lista = ControladorCampeonatos.getInstancia().getCampeonatosByClub(idClub);
-        List<CampeonatoVO> result = null;
+        List<CampeonatoVO> result = new ArrayList<>();
         for (Campeonato camp : lista) {
             result.add(camp.toVO());
         }

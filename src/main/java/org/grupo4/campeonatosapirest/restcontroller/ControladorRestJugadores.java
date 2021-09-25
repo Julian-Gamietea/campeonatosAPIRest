@@ -6,6 +6,7 @@ import org.grupocuatro.modelo.Jugador;
 import org.grupocuatro.vo.JugadorVO;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class ControladorRestJugadores {
     @RequestMapping("/getJugadores")
     public List<JugadorVO> getJugadores() {
         List<Jugador> jugadores = ControladorJugadores.getInstancia().getJugadores();
-        List<JugadorVO> jugadoresVO = Collections.emptyList();
+        List<JugadorVO> jugadoresVO = new ArrayList<>();
         for (Jugador jugador : jugadores) {
             jugadoresVO.add(jugador.toVO());
         }
@@ -65,7 +66,7 @@ public class ControladorRestJugadores {
     @RequestMapping("/getJugadoresByClub")
     public List<JugadorVO> getJugadoresByClub(@RequestParam(name = "idClub") Integer idClub) {
         List<Jugador> jugadores = ControladorJugadores.getInstancia().getJugadoresByClub(idClub);
-        List<JugadorVO> jugadoresVO = Collections.emptyList();
+        List<JugadorVO> jugadoresVO = new ArrayList<>();
         for (Jugador jugador : jugadores) {
             jugadoresVO.add(jugador.toVO());
         }
@@ -75,7 +76,7 @@ public class ControladorRestJugadores {
     @RequestMapping("/getJugadoresByCategoria")
     public List<JugadorVO> getJugadoresByCategoria(@RequestParam(name = "categoria") int categoria) {
         List<Jugador> jugadores = ControladorJugadores.getInstancia().getJugadoresByCategoria(categoria);
-        List<JugadorVO> jugadoresVO = Collections.emptyList();
+        List<JugadorVO> jugadoresVO = new ArrayList<>();
         for (Jugador jugador : jugadores) {
             jugadoresVO.add(jugador.toVO());
         }
@@ -85,7 +86,7 @@ public class ControladorRestJugadores {
     @RequestMapping("/getJugadoresHabilitadosByClubAndCategoria")
     public List<JugadorVO> getJugadoresHabilitadosByClubAndCategoria(@RequestParam(name = "idClub") Integer idClub, @RequestParam(name = "categoria") int categoria) {
         List<Jugador> jugadores = ControladorJugadores.getInstancia().getJugadoresHabilitadosCategoriaClub(idClub, categoria);
-        List<JugadorVO> jugadoresVO = Collections.emptyList();
+        List<JugadorVO> jugadoresVO = new ArrayList<>();
         for (Jugador jugador : jugadores) {
             jugadoresVO.add(jugador.toVO());
         }
@@ -100,7 +101,7 @@ public class ControladorRestJugadores {
     @RequestMapping("/getJugadorByNombre")
     public List<JugadorVO> getJugadorByNombre(@RequestParam(name = "nombre") String nombre, @RequestParam(name = "apellido") String apellido) {
         List<Jugador> jugadores = ControladorJugadores.getInstancia().getJugadorByNombre(nombre, apellido);
-        List<JugadorVO> jugadoresVO = Collections.emptyList();
+        List<JugadorVO> jugadoresVO = new ArrayList<>();
         for (Jugador jugador : jugadores) {
             jugadoresVO.add(jugador.toVO());
         }

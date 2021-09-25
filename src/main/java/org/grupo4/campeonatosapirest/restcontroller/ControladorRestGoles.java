@@ -6,6 +6,7 @@ import org.grupocuatro.modelo.Gol;
 import org.grupocuatro.vo.GolVO;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,7 +27,7 @@ public class ControladorRestGoles {
     @RequestMapping("/getGoles")
     public List<GolVO> getGoles() {
         List<Gol> lista = ControladorGoles.getInstancia().getGoles();
-        List<GolVO> result = null;
+        List<GolVO> result = new ArrayList<>();
         for (Gol gol : lista) {
             result.add(gol.toVO());
         }
@@ -42,7 +43,7 @@ public class ControladorRestGoles {
     @RequestMapping("/getGolesByPartido")
     public List<GolVO> getGolesByPartido(@RequestParam(name = "idPartido") Integer idPartido) {
         List<Gol> lista = ControladorGoles.getInstancia().getGolesByPartido(idPartido);
-        List<GolVO> result = null;
+        List<GolVO> result = new ArrayList<>();
         for (Gol gol : lista) {
             result.add(gol.toVO());
         }
@@ -55,7 +56,7 @@ public class ControladorRestGoles {
                                                 @RequestParam(name = "idClubAContar") Integer idClubAContar,
                                                 @RequestParam(name = "idClubRival") Integer idClubRival) {
         List<Gol> lista = ControladorGoles.getInstancia().getGolesByPartidoAndClub(idPartido, idClubAContar, idClubRival);
-        List<GolVO> result = null;
+        List<GolVO> result = new ArrayList<>();
         for (Gol gol : lista) {
             result.add(gol.toVO());
         }
@@ -67,7 +68,7 @@ public class ControladorRestGoles {
     public List<GolVO> getGolesByPartidoAndSentido(@RequestParam(name = "idPartido") Integer idPartido,
                                                    @RequestParam(name = "sentido") String sentido) {
         List<Gol> lista = ControladorGoles.getInstancia().getGolesByPartidoAndSentido(idPartido, sentido);
-        List<GolVO> result = null;
+        List<GolVO> result = new ArrayList<>();
         for (Gol gol : lista) {
             result.add(gol.toVO());
         }
@@ -79,7 +80,7 @@ public class ControladorRestGoles {
     public List<GolVO> getGolesByJugadorAndPartido(@RequestParam(name = "idPartido") Integer idPartido,
                                                    @RequestParam(name = "idJugador") Integer idJugador) {
         List<Gol> lista = ControladorGoles.getInstancia().getGolesByJugadorAndPartido(idPartido, idJugador);
-        List<GolVO> result = null;
+        List<GolVO> result = new ArrayList<>();
         for (Gol gol : lista) {
             result.add(gol.toVO());
         }
@@ -90,7 +91,7 @@ public class ControladorRestGoles {
     @RequestMapping("/getGolesByJugador")
     public List<GolVO> getGolesByJugador(@RequestParam(name = "idJugador") Integer idJugador) {
         List<Gol> lista = ControladorGoles.getInstancia().getGolesByJugador(idJugador);
-        List<GolVO> result = null;
+        List<GolVO> result = new ArrayList<>();
         for (Gol gol : lista) {
             result.add(gol.toVO());
         }
