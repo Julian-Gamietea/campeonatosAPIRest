@@ -13,8 +13,11 @@ import java.util.List;
 public class ControladorRestGoles {
 
     @PostMapping("/cargarGol")
-    public void cargarGol(@RequestBody GolVO gol) {
-        ControladorGoles.getInstancia().cargarGol(gol.getJugador().getIdJugador(), gol.getPartido().getIdPartido(), gol.getMinuto(), gol.getTipo());
+    public void cargarGol(@RequestParam(name = "idJugador") Integer idJugador,
+                          @RequestParam(name = "idPartido") Integer idPartido,
+                          @RequestParam(name = "minuto") int minuto,
+                          @RequestParam(name = "tipo") String tipo) {
+        ControladorGoles.getInstancia().cargarGol(idJugador, idPartido, minuto, tipo);
     }
 
     @RequestMapping("/contarCantidadGoles")
@@ -38,7 +41,7 @@ public class ControladorRestGoles {
     @RequestMapping("/getGolById")
     public GolVO getGolById(@RequestParam(name = "idGol") Integer idGol) {
         GolVO gol = ControladorGoles.getInstancia().getGolById(idGol).toVO();
-        if(gol != null)
+        if (gol != null)
             return gol;
         return new GolVO();
     }
