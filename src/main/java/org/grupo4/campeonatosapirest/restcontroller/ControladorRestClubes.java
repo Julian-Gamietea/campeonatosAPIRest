@@ -24,46 +24,52 @@ public class ControladorRestClubes {
     }
 
     @RequestMapping("/getClubById")
-    public ClubVO getClubById(@RequestParam(name = "idClub") Integer idClub ){
+    public ClubVO getClubById(@RequestParam(name = "idClub") Integer idClub) {
         ClubVO club = ControladorClubes.getInstancia().getClubById(idClub).toVO();
         return (club == null) ? new ClubVO() : club;
     }
+
     @RequestMapping("/getClubes")
-    public List<ClubVO> getClubes(){
+    public List<ClubVO> getClubes() {
         List<Club> clubes = ControladorClubes.getInstancia().getClubes();
         List<ClubVO> clubesVOS = new ArrayList<>();
 
-        for (Club c: clubes) {
-            clubesVOS.add(c.toVO());
+        if (clubes != null) {
+            for (Club c : clubes) {
+                clubesVOS.add(c.toVO());
+            }
         }
 
         return clubesVOS;
     }
 
     @RequestMapping("/getClubesByCampeonato")
-    public List<ClubVO> getClubesByCampeonato(@RequestBody Campeonato campeonato){
-        List<Club> clubes = ControladorClubes.getInstancia().getClubesByCampeonato(campeonato.getIdCampeonato());
+    public List<ClubVO> getClubesByCampeonato(@RequestParam(name = "idCampeonato") Integer idCampeonato) {
+        List<Club> clubes = ControladorClubes.getInstancia().getClubesByCampeonato(idCampeonato);
         List<ClubVO> clubesVOS = new ArrayList<>();
 
-        for(Club c: clubes) {
-            clubesVOS.add(c.toVO());
+        if (clubes != null) {
+            for (Club c : clubes) {
+                clubesVOS.add(c.toVO());
+            }
         }
 
         return clubesVOS;
     }
 
-    @RequestMapping("/getClubesHabiltadosPorCategoria")
-    public List<ClubVO> getClubesHabiltadosPorCategoria(@RequestParam(name = "categoria") int categoria){
-        List<Club> clubes =  ControladorClubes.getInstancia().getClubesHabiltadosPorCategoria(categoria);
+    @RequestMapping("/getClubesHabilitadosPorCategoria")
+    public List<ClubVO> getClubesHabiltadosPorCategoria(@RequestParam(name = "categoria") int categoria) {
+        List<Club> clubes = ControladorClubes.getInstancia().getClubesHabiltadosPorCategoria(categoria);
         List<ClubVO> clubesVOS = new ArrayList<>();
 
-        for(Club c: clubes) {
-            clubesVOS.add(c.toVO());
+        if (clubes != null) {
+            for (Club c : clubes) {
+                clubesVOS.add(c.toVO());
+            }
         }
 
         return clubesVOS;
     }
-
 
 
 }

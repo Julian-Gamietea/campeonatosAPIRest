@@ -26,7 +26,7 @@ public class ControladorRestCampeonatos {
 
     @PostMapping("/definirTipoCampeonatoAndCategoria")
     public void definirTipoCampeonatoAndCategoria(@RequestParam(name = "cantidadZonas") int cantidadZonas,
-                                                  @RequestParam(name = "idCampeonatos") Integer idCampeonato,
+                                                  @RequestParam(name = "idCampeonato") Integer idCampeonato,
                                                   @RequestParam(name = "categoria") int categoria) {
 
         ControladorCampeonatos.getInstancia().definirTipoCampeonatoAndCategoria(cantidadZonas, idCampeonato, categoria);
