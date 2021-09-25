@@ -6,6 +6,8 @@ import org.grupocuatro.modelo.Jugador;
 import org.grupocuatro.vo.JugadorVO;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,8 +16,19 @@ import java.util.List;
 public class ControladorRestJugadores {
 
     @PostMapping("/crearJugador")
-    public Integer crearJugador(@RequestBody JugadorVO jugador) {
-        return ControladorJugadores.getInstancia().agregarJugador(jugador.getTipoDocumento(), jugador.getDocumento(), jugador.getNombre(), jugador.getApellido(), jugador.getClub().getIdClub(), jugador.getFechaNacimiento(), jugador.getDireccion(), jugador.getMail(), jugador.getTelefono());
+    public Integer crearJugador(@RequestParam(name = "tipoDoc") String tipoDoc,
+                                @RequestParam(name = "documento") int documento,
+                                @RequestParam(name = "nombre") String nombre,
+                                @RequestParam(name = "apellido") String apellido,
+                                @RequestParam(name = "idClub") Integer idClub,
+                                @RequestParam(name = "fechaNac") String fechaNacString,
+                                @RequestParam(name = "direccion") String direccion,
+                                @RequestParam(name = "mail") String mail,
+                                @RequestParam(name = "telefono") String telefono) {
+
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/d");
+        LocalDate fechaNac = LocalDate.parse(fechaNacString, formato);
+        return ControladorJugadores.getInstancia().agregarJugador(tipoDoc, documento, nombre, apellido, idClub, fechaNac, direccion, mail, telefono);
     }
 
     @PostMapping("/modificarDireccion")
