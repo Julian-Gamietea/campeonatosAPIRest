@@ -50,8 +50,10 @@ public class ControladorRestCampeonatos {
     public List<CampeonatoVO> getCampeonatos() {
         List<Campeonato> lista = ControladorCampeonatos.getInstancia().getCampeonatos();
         List<CampeonatoVO> result = new ArrayList<>();
-        for (Campeonato camp : lista) {
-            result.add(camp.toVO());
+        if (lista != null) {
+            for (Campeonato camp : lista) {
+                result.add(camp.toVO());
+            }
         }
         return result;
     }
@@ -60,14 +62,16 @@ public class ControladorRestCampeonatos {
     public List<CampeonatoVO> getCampeonatosByEstado(@RequestParam(name = "estado") String estado) {
         List<Campeonato> lista = ControladorCampeonatos.getInstancia().getCampeonatosByEstado(estado);
         List<CampeonatoVO> result = new ArrayList<>();
-        for (Campeonato camp : lista) {
-            result.add(camp.toVO());
+        if (lista != null) {
+            for (Campeonato camp : lista) {
+                result.add(camp.toVO());
+            }
         }
         return result;
     }
 
     @PostMapping("/agregarClubACampeonato")
-    public void agregarClubACampeonato(@RequestParam(name = "idClub") Integer idClub ,
+    public void agregarClubACampeonato(@RequestParam(name = "idClub") Integer idClub,
                                        @RequestParam(name = "idCampeonato") Integer idCampeonato) {
         ControladorCampeonatos.getInstancia().agregarClubACampeonato(idClub, idCampeonato);
     }
@@ -76,10 +80,13 @@ public class ControladorRestCampeonatos {
     public List<CampeonatoVO> getCampeonatosByClub(@RequestParam(name = "idClub") Integer idClub) {
         List<Campeonato> lista = ControladorCampeonatos.getInstancia().getCampeonatosByClub(idClub);
         List<CampeonatoVO> result = new ArrayList<>();
-        for (Campeonato camp : lista) {
-            result.add(camp.toVO());
+
+        if (lista != null) {
+            for (Campeonato camp : lista) {
+                result.add(camp.toVO());
+            }
         }
-        if (result.isEmpty()) return Collections.emptyList();
-        else return result;
+
+        return result;
     }
 }
