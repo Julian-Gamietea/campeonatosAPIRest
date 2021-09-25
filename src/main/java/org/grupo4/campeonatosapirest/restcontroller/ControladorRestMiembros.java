@@ -9,13 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 public class ControladorRestMiembros {
 
     @PostMapping("/agregarJugadoresEnLista")
-    public void agregarJugadoresEnLista(@RequestBody MiembroVO miembro) {
-        ControladorMiembros.getInstancia().agregarJugadoresEnLista(miembro.getClub().toModelo(), miembro.getPartido().toModelo(), miembro.getJugador().toModelo());
+    public void agregarJugadoresEnLista(@RequestParam(name = "idClub") Integer idClub,
+                                        @RequestParam(name = "idPartido") Integer idPartido,
+                                        @RequestParam(name = "idJugador") Integer idJugador) {
+        ControladorMiembros.getInstancia().agregarJugadoresEnLista(idClub, idPartido, idJugador);
     }
 
     @PostMapping("/definirIngresoEgreso")
@@ -29,8 +32,11 @@ public class ControladorRestMiembros {
     public List<MiembroVO> getMiembros() {
         List<Miembro> lista = ControladorMiembros.getInstancia().getMiembros();
         List<MiembroVO> result = new ArrayList<>();
-        for (Miembro miembro : lista) {
-            result.add(miembro.toVO());
+
+        if (lista != null) {
+            for (Miembro miembro : lista) {
+                result.add(miembro.toVO());
+            }
         }
 
         return result;
@@ -39,19 +45,18 @@ public class ControladorRestMiembros {
     @RequestMapping("/getMiembroById")
     public MiembroVO getMiembroById(@RequestParam(name = "idMiembro") Integer idMiembro) {
         MiembroVO miembro = ControladorMiembros.getInstancia().getMiembroById(idMiembro).toVO();
-        if (miembro == null)
-            return new MiembroVO();
-        else {
-            return miembro;
-        }
+        return Objects.requireNonNullElseGet(miembro, MiembroVO::new);
     }
 
     @RequestMapping("/getMiembrosByClub")
     public List<MiembroVO> getMiembrosByClub(@RequestParam(name = "idClub") Integer idClub) {
         List<Miembro> lista = ControladorMiembros.getInstancia().getMiembrosByClub(idClub);
         List<MiembroVO> result = new ArrayList<>();
-        for (Miembro miembro : lista) {
-            result.add(miembro.toVO());
+
+        if (lista != null) {
+            for (Miembro miembro : lista) {
+                result.add(miembro.toVO());
+            }
         }
 
         return result;
@@ -62,8 +67,11 @@ public class ControladorRestMiembros {
                                                        @RequestParam(name = "idPartido") Integer idPartido) {
         List<Miembro> lista = ControladorMiembros.getInstancia().getMiembrosByClubAndPartido(idClub, idPartido);
         List<MiembroVO> result = new ArrayList<>();
-        for (Miembro miembro : lista) {
-            result.add(miembro.toVO());
+
+        if (lista != null) {
+            for (Miembro miembro : lista) {
+                result.add(miembro.toVO());
+            }
         }
 
         return result;
@@ -74,11 +82,8 @@ public class ControladorRestMiembros {
                                                    @RequestParam(name = "idJugador") Integer idJugador) {
 
         MiembroVO miembro = ControladorMiembros.getInstancia().getMiembroByPartidoAndJugador(idPartido, idJugador).toVO();
-        if (miembro == null)
-            return new MiembroVO();
-        else {
-            return miembro;
-        }
+
+        return Objects.requireNonNullElseGet(miembro, MiembroVO::new);
     }
 
     @RequestMapping("/getMiembroByClubAndPartidoAndJugador")
@@ -87,20 +92,19 @@ public class ControladorRestMiembros {
                                                           @RequestParam(name = "idJugador") Integer idJugador) {
 
         MiembroVO miembro = ControladorMiembros.getInstancia().getMiembroByClubAndPartidoAndJugador(idClub, idPartido, idJugador).toVO();
-        if (miembro == null)
-            return new MiembroVO();
-        else {
-            return miembro;
-        }
+        return Objects.requireNonNullElseGet(miembro, MiembroVO::new);
     }
 
     @RequestMapping("/getMiembroByJugadorAndFecha")
     public List<MiembroVO> getMiembroByJugadorAndFecha(@RequestParam(name = "idJugador") Integer idJugador,
                                                        @RequestParam(name = "fecha") LocalDate fecha) {
-        List<Miembro> lista = ControladorMiembros.getInstancia().getMiembroByJugadorAndFecha(idJugador,fecha);
+        List<Miembro> lista = ControladorMiembros.getInstancia().getMiembroByJugadorAndFecha(idJugador, fecha);
         List<MiembroVO> result = new ArrayList<>();
-        for (Miembro miembro : lista) {
-            result.add(miembro.toVO());
+
+        if (lista != null) {
+            for (Miembro miembro : lista) {
+                result.add(miembro.toVO());
+            }
         }
 
         return result;
