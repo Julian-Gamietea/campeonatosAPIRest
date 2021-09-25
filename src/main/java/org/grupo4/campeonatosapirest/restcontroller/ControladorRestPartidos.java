@@ -51,15 +51,6 @@ public class ControladorRestPartidos {
         ControladorPartidos.getInstancia().validadoPorClubVisitante(idClub, idPartido);
     }
 
-    @PostMapping("/actualizarTablaPosiciones")
-    public void actualizarTablaPosiciones(@RequestParam(name = "idClub") Integer idClub,
-                                          @RequestParam(name = "idCampeonato") Integer idCampeonato,
-                                          @RequestParam(name = "puntos") int puntos,
-                                          @RequestParam(name = "golesFavor") int golesFavor,
-                                          @RequestParam(name = "golesContra") int golesContra) {
-
-        ControladorPartidos.getInstancia().actualizarTablaPosiciones(idClub, idCampeonato, puntos, golesFavor, golesContra);
-    }
 
     @RequestMapping("/encontrarPartido")
     public PartidoVO encontrarPartido(@RequestParam(name = "idPartido") Integer idPartido) {
