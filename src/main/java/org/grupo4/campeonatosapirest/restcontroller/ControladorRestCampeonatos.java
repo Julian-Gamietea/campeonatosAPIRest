@@ -19,15 +19,17 @@ import java.util.List;
 public class ControladorRestCampeonatos {
 
     @PostMapping("/crearCampeonato")
-    public void crearCampeonato(@RequestParam(name = "descripcion") String descripcion,
+    public Integer crearCampeonato(@RequestParam(name = "descripcion") String descripcion,
                                 @RequestParam(name = "fechaInicio") String fechaInicioString,
                                 @RequestParam(name = "fechaFin") String fechaFinString,
-                                @RequestParam(name = "estado") String estado) {
+                                @RequestParam(name = "estado") String estado) throws CampeonatoException {
 
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/d");
         LocalDate fechaInicio = LocalDate.parse(fechaInicioString, formato);
         LocalDate fechaFin = LocalDate.parse(fechaFinString, formato);
-        ControladorCampeonatos.getInstancia().crearCampeonato(descripcion, fechaInicio, fechaFin, estado);
+        Integer id = ControladorCampeonatos.getInstancia().crearCampeonato(descripcion, fechaInicio, fechaFin, estado);
+        if (id == null) throw new CampeonatoException("El campeonato que se esta intentando crear ya existe");
+        else return id;
     }
 
     @PostMapping("/definirTipoCampeonatoAndCategoria")
@@ -36,7 +38,6 @@ public class ControladorRestCampeonatos {
                                                   @RequestParam(name = "categoria") int categoria) {
 
         ControladorCampeonatos.getInstancia().definirTipoCampeonatoAndCategoria(cantidadZonas, idCampeonato, categoria);
-
     }
 
     @PostMapping("/terminarCampeonato")
