@@ -2,6 +2,7 @@ package org.grupo4.campeonatosapirest.restcontroller;
 
 import org.grupocuatro.controlador.ControladorFaltas;
 import org.grupocuatro.controlador.ControladorGoles;
+import org.grupocuatro.excepciones.GolException;
 import org.grupocuatro.modelo.Gol;
 import org.grupocuatro.vo.GolVO;
 import org.springframework.web.bind.annotation.*;
@@ -31,27 +32,33 @@ public class ControladorRestGoles {
     public List<GolVO> getGoles() {
         List<Gol> lista = ControladorGoles.getInstancia().getGoles();
         List<GolVO> result = new ArrayList<>();
-        for (Gol gol : lista) {
-            result.add(gol.toVO());
+
+        if (lista != null) {
+            for (Gol gol : lista) {
+                result.add(gol.toVO());
+            }
         }
 
         return result;
     }
 
     @RequestMapping("/getGolById")
-    public GolVO getGolById(@RequestParam(name = "idGol") Integer idGol) {
-        GolVO gol = ControladorGoles.getInstancia().getGolById(idGol).toVO();
-        if (gol != null)
-            return gol;
-        return new GolVO();
+    public GolVO getGolById(@RequestParam(name = "idGol") Integer idGol) throws GolException {
+        Gol gol = ControladorGoles.getInstancia().getGolById(idGol);
+        if (gol == null) throw new GolException("No existe un gol con id: " + idGol);
+        else return gol.toVO();
+
     }
 
     @RequestMapping("/getGolesByPartido")
     public List<GolVO> getGolesByPartido(@RequestParam(name = "idPartido") Integer idPartido) {
         List<Gol> lista = ControladorGoles.getInstancia().getGolesByPartido(idPartido);
         List<GolVO> result = new ArrayList<>();
-        for (Gol gol : lista) {
-            result.add(gol.toVO());
+
+        if (lista != null) {
+            for (Gol gol : lista) {
+                result.add(gol.toVO());
+            }
         }
 
         return result;
@@ -63,8 +70,11 @@ public class ControladorRestGoles {
                                                 @RequestParam(name = "idClubRival") Integer idClubRival) {
         List<Gol> lista = ControladorGoles.getInstancia().getGolesByPartidoAndClub(idPartido, idClubAContar, idClubRival);
         List<GolVO> result = new ArrayList<>();
-        for (Gol gol : lista) {
-            result.add(gol.toVO());
+
+        if (lista != null) {
+            for (Gol gol : lista) {
+                result.add(gol.toVO());
+            }
         }
 
         return result;
@@ -75,8 +85,11 @@ public class ControladorRestGoles {
                                                    @RequestParam(name = "sentido") String sentido) {
         List<Gol> lista = ControladorGoles.getInstancia().getGolesByPartidoAndSentido(idPartido, sentido);
         List<GolVO> result = new ArrayList<>();
-        for (Gol gol : lista) {
-            result.add(gol.toVO());
+
+        if (lista != null) {
+            for (Gol gol : lista) {
+                result.add(gol.toVO());
+            }
         }
 
         return result;
@@ -87,8 +100,11 @@ public class ControladorRestGoles {
                                                    @RequestParam(name = "idJugador") Integer idJugador) {
         List<Gol> lista = ControladorGoles.getInstancia().getGolesByJugadorAndPartido(idPartido, idJugador);
         List<GolVO> result = new ArrayList<>();
-        for (Gol gol : lista) {
-            result.add(gol.toVO());
+
+        if (lista != null) {
+            for (Gol gol : lista) {
+                result.add(gol.toVO());
+            }
         }
 
         return result;
@@ -98,8 +114,11 @@ public class ControladorRestGoles {
     public List<GolVO> getGolesByJugador(@RequestParam(name = "idJugador") Integer idJugador) {
         List<Gol> lista = ControladorGoles.getInstancia().getGolesByJugador(idJugador);
         List<GolVO> result = new ArrayList<>();
-        for (Gol gol : lista) {
-            result.add(gol.toVO());
+
+        if (lista != null) {
+            for (Gol gol : lista) {
+                result.add(gol.toVO());
+            }
         }
 
         return result;

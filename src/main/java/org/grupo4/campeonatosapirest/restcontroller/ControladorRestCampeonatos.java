@@ -1,6 +1,7 @@
 package org.grupo4.campeonatosapirest.restcontroller;
 
 import org.grupocuatro.controlador.ControladorCampeonatos;
+import org.grupocuatro.excepciones.CampeonatoException;
 import org.grupocuatro.modelo.Campeonato;
 import org.grupocuatro.vo.CampeonatoVO;
 import org.grupocuatro.vo.ClubesCampeonatoVO;
@@ -44,22 +45,23 @@ public class ControladorRestCampeonatos {
     }
 
     @RequestMapping("/encontrarCampeonato")
-    public CampeonatoVO encontrarCampeonato(@RequestParam(name = "idCampeonato") Integer idCampeonato) {
-        CampeonatoVO result = ControladorCampeonatos.getInstancia().encontrarCampeonato(idCampeonato).toVO();
-        if (result != null)
-            return result;
-        return new CampeonatoVO();
+    public CampeonatoVO encontrarCampeonato(@RequestParam(name = "idCampeonato") Integer idCampeonato) throws CampeonatoException {
+        Campeonato result = ControladorCampeonatos.getInstancia().encontrarCampeonato(idCampeonato);
+        if (result == null) throw new CampeonatoException("No existe un campeonato con id: " + idCampeonato);
+        else return result.toVO();
     }
 
     @RequestMapping("/getCampeonatos")
     public List<CampeonatoVO> getCampeonatos() {
         List<Campeonato> lista = ControladorCampeonatos.getInstancia().getCampeonatos();
         List<CampeonatoVO> result = new ArrayList<>();
+
         if (lista != null) {
             for (Campeonato camp : lista) {
                 result.add(camp.toVO());
             }
         }
+
         return result;
     }
 
@@ -67,11 +69,13 @@ public class ControladorRestCampeonatos {
     public List<CampeonatoVO> getCampeonatosByEstado(@RequestParam(name = "estado") String estado) {
         List<Campeonato> lista = ControladorCampeonatos.getInstancia().getCampeonatosByEstado(estado);
         List<CampeonatoVO> result = new ArrayList<>();
+
         if (lista != null) {
             for (Campeonato camp : lista) {
                 result.add(camp.toVO());
             }
         }
+
         return result;
     }
 

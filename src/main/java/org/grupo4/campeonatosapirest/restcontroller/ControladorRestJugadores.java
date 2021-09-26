@@ -2,6 +2,7 @@ package org.grupo4.campeonatosapirest.restcontroller;
 
 
 import org.grupocuatro.controlador.ControladorJugadores;
+import org.grupocuatro.excepciones.JugadorException;
 import org.grupocuatro.modelo.Jugador;
 import org.grupocuatro.vo.JugadorVO;
 import org.springframework.web.bind.annotation.*;
@@ -52,13 +53,11 @@ public class ControladorRestJugadores {
     }
 
     @RequestMapping("/encontrarJugador")
-    public JugadorVO encontrarJugador(@RequestParam(name = "idJugador") Integer idJugador) {
-        JugadorVO jugador = ControladorJugadores.getInstancia().encontrarJugador(idJugador).toVO();
-        if (jugador == null)
-            return new JugadorVO();
-        else {
-            return jugador;
-        }
+    public JugadorVO encontrarJugador(@RequestParam(name = "idJugador") Integer idJugador) throws JugadorException {
+        Jugador jugador = ControladorJugadores.getInstancia().encontrarJugador(idJugador);
+        if (jugador == null) throw new JugadorException("No existe un jugador con id: " + idJugador);
+        else return jugador.toVO();
+
     }
 
     @RequestMapping("/getStatsByCampeonato")
@@ -75,9 +74,13 @@ public class ControladorRestJugadores {
     public List<JugadorVO> getJugadores() {
         List<Jugador> jugadores = ControladorJugadores.getInstancia().getJugadores();
         List<JugadorVO> jugadoresVO = new ArrayList<>();
-        for (Jugador jugador : jugadores) {
-            jugadoresVO.add(jugador.toVO());
+
+        if (jugadores != null) {
+            for (Jugador jugador : jugadores) {
+                jugadoresVO.add(jugador.toVO());
+            }
         }
+
         return jugadoresVO;
     }
 
@@ -85,9 +88,13 @@ public class ControladorRestJugadores {
     public List<JugadorVO> getJugadoresByClub(@RequestParam(name = "idClub") Integer idClub) {
         List<Jugador> jugadores = ControladorJugadores.getInstancia().getJugadoresByClub(idClub);
         List<JugadorVO> jugadoresVO = new ArrayList<>();
-        for (Jugador jugador : jugadores) {
-            jugadoresVO.add(jugador.toVO());
+
+        if (jugadores != null) {
+            for (Jugador jugador : jugadores) {
+                jugadoresVO.add(jugador.toVO());
+            }
         }
+
         return jugadoresVO;
     }
 
@@ -95,9 +102,13 @@ public class ControladorRestJugadores {
     public List<JugadorVO> getJugadoresByCategoria(@RequestParam(name = "categoria") int categoria) {
         List<Jugador> jugadores = ControladorJugadores.getInstancia().getJugadoresByCategoria(categoria);
         List<JugadorVO> jugadoresVO = new ArrayList<>();
-        for (Jugador jugador : jugadores) {
-            jugadoresVO.add(jugador.toVO());
+
+        if (jugadores != null) {
+            for (Jugador jugador : jugadores) {
+                jugadoresVO.add(jugador.toVO());
+            }
         }
+
         return jugadoresVO;
     }
 
@@ -105,29 +116,34 @@ public class ControladorRestJugadores {
     public List<JugadorVO> getJugadoresHabilitadosByClubAndCategoria(@RequestParam(name = "idClub") Integer idClub, @RequestParam(name = "categoria") int categoria) {
         List<Jugador> jugadores = ControladorJugadores.getInstancia().getJugadoresHabilitadosCategoriaClub(idClub, categoria);
         List<JugadorVO> jugadoresVO = new ArrayList<>();
-        for (Jugador jugador : jugadores) {
-            jugadoresVO.add(jugador.toVO());
+
+        if (jugadores != null) {
+            for (Jugador jugador : jugadores) {
+                jugadoresVO.add(jugador.toVO());
+            }
         }
+
         return jugadoresVO;
     }
 
     @RequestMapping("/getJugadorByDocumento")
-    public JugadorVO getJugadorByDocumento(@RequestParam(name = "documento") Integer documento, @RequestParam(name = "tipoDoc") String tipoDoc) {
-        JugadorVO jugador = ControladorJugadores.getInstancia().getJugadorByDocumento(documento, tipoDoc).toVO();
-        if (jugador == null)
-            return new JugadorVO();
-        else {
-            return jugador;
-        }
+    public JugadorVO getJugadorByDocumento(@RequestParam(name = "documento") Integer documento, @RequestParam(name = "tipoDoc") String tipoDoc) throws JugadorException {
+        Jugador jugador = ControladorJugadores.getInstancia().getJugadorByDocumento(documento, tipoDoc);
+        if (jugador == null) throw new JugadorException("No existe un jugador con numero de documento: " + documento);
+        else return jugador.toVO();
     }
 
     @RequestMapping("/getJugadorByNombre")
     public List<JugadorVO> getJugadorByNombre(@RequestParam(name = "nombre") String nombre, @RequestParam(name = "apellido") String apellido) {
         List<Jugador> jugadores = ControladorJugadores.getInstancia().getJugadorByNombre(nombre, apellido);
         List<JugadorVO> jugadoresVO = new ArrayList<>();
-        for (Jugador jugador : jugadores) {
-            jugadoresVO.add(jugador.toVO());
+
+        if (jugadores != null) {
+            for (Jugador jugador : jugadores) {
+                jugadoresVO.add(jugador.toVO());
+            }
         }
+
         return jugadoresVO;
     }
 

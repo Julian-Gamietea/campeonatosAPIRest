@@ -18,8 +18,12 @@ public class ControladorRestTablasPosiciones {
     public List<TablaPosicionesVO> getTablasPosicionesByClub(@RequestParam(name = "idClub") Integer idClub) {
         List<TablaPosiciones> tablas = ControladorTablasPosiciones.getInstancia().getTablasPosicionesByClub(idClub);
         List<TablaPosicionesVO> tablasVO = new ArrayList<>();
-        for (TablaPosiciones tabla : tablas)
-            tablasVO.add(tabla.toVO());
+
+        if (tablas != null) {
+            for (TablaPosiciones tabla : tablas)
+                tablasVO.add(tabla.toVO());
+        }
+
         return tablasVO;
     }
 
@@ -39,8 +43,12 @@ public class ControladorRestTablasPosiciones {
     public List<TablaPosicionesVO> getTablaPosicionesByCampeonato(@RequestParam(name = "idCampeonato") Integer idCampeonato) {
         List<TablaPosiciones> tablas = ControladorTablasPosiciones.getInstancia().getTablasPosicionesByCampeonato(idCampeonato);
         List<TablaPosicionesVO> tablasVO = new ArrayList<>();
-        for (TablaPosiciones tabla : tablas)
-            tablasVO.add(tabla.toVO());
+
+        if (tablas != null) {
+            for (TablaPosiciones tabla : tablas)
+                tablasVO.add(tabla.toVO());
+        }
+
         return tablasVO;
     }
 
@@ -48,8 +56,12 @@ public class ControladorRestTablasPosiciones {
     public List<TablaPosicionesVO> getTablaPosicionesByPuntos(@RequestParam(name = "puntos") int puntos) {
         List<TablaPosiciones> tablas = ControladorTablasPosiciones.getInstancia().getTablaPosicionesByPuntos(puntos);
         List<TablaPosicionesVO> tablasVO = new ArrayList<>();
-        for (TablaPosiciones tabla : tablas)
-            tablasVO.add(tabla.toVO());
+
+        if (tablas != null) {
+            for (TablaPosiciones tabla : tablas)
+                tablasVO.add(tabla.toVO());
+        }
+
         return tablasVO;
     }
 

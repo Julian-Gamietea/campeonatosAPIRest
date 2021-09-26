@@ -1,5 +1,6 @@
 package org.grupo4.campeonatosapirest.restcontroller;
 
+import org.grupocuatro.excepciones.ClubException;
 import org.grupocuatro.modelo.*;
 import org.grupocuatro.controlador.*;
 import org.grupocuatro.vo.ClubVO;
@@ -24,9 +25,10 @@ public class ControladorRestClubes {
     }
 
     @RequestMapping("/getClubById")
-    public ClubVO getClubById(@RequestParam(name = "idClub") Integer idClub) {
-        ClubVO club = ControladorClubes.getInstancia().getClubById(idClub).toVO();
-        return (club == null) ? new ClubVO() : club;
+    public ClubVO getClubById(@RequestParam(name = "idClub") Integer idClub) throws ClubException {
+        Club club = ControladorClubes.getInstancia().getClubById(idClub);
+        if (club == null) throw new ClubException("No existe un club con id: " + idClub);
+        else return club.toVO();
     }
 
     @RequestMapping("/getClubes")

@@ -46,7 +46,9 @@ public class ControladorRestMiembros {
 
     @RequestMapping("/getMiembroById")
     public MiembroVO getMiembroById(@RequestParam(name = "idMiembro") Integer idMiembro) throws MiembroException {
-        return ControladorMiembros.getInstancia().getMiembroById(idMiembro).toVO();
+        Miembro miembro = ControladorMiembros.getInstancia().getMiembroById(idMiembro);
+        if (miembro == null) throw new MiembroException("No existe un miembro con id: " + idMiembro);
+        else return miembro.toVO();
     }
 
     @RequestMapping("/getMiembrosByClub")
@@ -80,20 +82,23 @@ public class ControladorRestMiembros {
 
     @RequestMapping("/getMiembroByPartidoAndJugador")
     public MiembroVO getMiembroByPartidoAndJugador(@RequestParam(name = "idPartido") Integer idPartido,
-                                                   @RequestParam(name = "idJugador") Integer idJugador) {
+                                                   @RequestParam(name = "idJugador") Integer idJugador) throws MiembroException {
 
-        MiembroVO miembro = ControladorMiembros.getInstancia().getMiembroByPartidoAndJugador(idPartido, idJugador).toVO();
-
-        return Objects.requireNonNullElseGet(miembro, MiembroVO::new);
+        Miembro miembro = ControladorMiembros.getInstancia().getMiembroByPartidoAndJugador(idPartido, idJugador);
+        if (miembro == null)
+            throw new MiembroException("El jugador: " + idJugador + " no participa en el partido: " + idPartido);
+        else return miembro.toVO();
     }
 
     @RequestMapping("/getMiembroByClubAndPartidoAndJugador")
     public MiembroVO getMiembroByClubAndPartidoAndJugador(@RequestParam(name = "idClub") Integer idClub,
                                                           @RequestParam(name = "idPartido") Integer idPartido,
-                                                          @RequestParam(name = "idJugador") Integer idJugador) {
+                                                          @RequestParam(name = "idJugador") Integer idJugador) throws MiembroException {
 
-        MiembroVO miembro = ControladorMiembros.getInstancia().getMiembroByClubAndPartidoAndJugador(idClub, idPartido, idJugador).toVO();
-        return Objects.requireNonNullElseGet(miembro, MiembroVO::new);
+        Miembro miembro = ControladorMiembros.getInstancia().getMiembroByClubAndPartidoAndJugador(idClub, idPartido, idJugador);
+        if (miembro == null)
+            throw new MiembroException("No existe un miembro de lista con idClub: " + idClub + ", idPartido: " + idPartido + ", idJugador: " + idJugador);
+        else return miembro.toVO();
     }
 
     @RequestMapping("/getMiembroByJugadorAndFecha")
