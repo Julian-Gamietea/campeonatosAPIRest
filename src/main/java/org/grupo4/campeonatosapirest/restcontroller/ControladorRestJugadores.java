@@ -25,25 +25,32 @@ public class ControladorRestJugadores {
                                 @RequestParam(name = "fechaNac") String fechaNacString,
                                 @RequestParam(name = "direccion") String direccion,
                                 @RequestParam(name = "mail") String mail,
-                                @RequestParam(name = "telefono") String telefono) {
+                                @RequestParam(name = "telefono") String telefono) throws JugadorException {
 
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/d");
         LocalDate fechaNac = LocalDate.parse(fechaNacString, formato);
-        return ControladorJugadores.getInstancia().agregarJugador(tipoDoc, documento, nombre, apellido, idClub, fechaNac, direccion, mail, telefono);
+        Integer id = ControladorJugadores.getInstancia().agregarJugador(tipoDoc, documento, nombre, apellido, idClub, fechaNac, direccion, mail, telefono);
+        if (id == null)
+            throw new JugadorException("Ya existe un jugador con documento: " + tipoDoc + " y numero de documento: " + documento);
+            //como se van a mostrar un listado de los clubes, no sera necesario chequear que el club sea valido
+        else return id;
     }
 
     @PostMapping("/modificarDireccion")
-    public void modificarDireccion(@RequestParam(name = "idJugador") Integer idJugador, @RequestParam(name = "direccion") String direccion) {
+    public void modificarDireccion(@RequestParam(name = "idJugador") Integer idJugador,
+                                   @RequestParam(name = "direccion") String direccion) {
         ControladorJugadores.getInstancia().modificarDireccion(idJugador, direccion);
     }
 
     @PostMapping("/modificarMail")
-    public void modificarMail(@RequestParam(name = "idJugador") Integer idJugador, @RequestParam(name = "mail") String mail) {
+    public void modificarMail(@RequestParam(name = "idJugador") Integer idJugador,
+                              @RequestParam(name = "mail") String mail) {
         ControladorJugadores.getInstancia().modificarMail(idJugador, mail);
     }
 
     @PostMapping("/modificarTelefono")
-    public void modificarTelefono(@RequestParam(name = "idJugador") Integer idJugador, @RequestParam(name = "telefono") String telefono) {
+    public void modificarTelefono(@RequestParam(name = "idJugador") Integer idJugador,
+                                  @RequestParam(name = "telefono") String telefono) {
         ControladorJugadores.getInstancia().modificarTelefono(idJugador, telefono);
     }
 
@@ -60,13 +67,16 @@ public class ControladorRestJugadores {
 
     }
 
+    //TODO estaria bueno ver como devolver las estadisticas
     @RequestMapping("/getStatsByCampeonato")
-    public void getStatsByCampeonato(@RequestParam(name = "idJugador") Integer idJugador, @RequestParam(name = "idCampeonato") Integer idCampeonato) {
+    public void getStatsByCampeonato(@RequestParam(name = "idJugador") Integer idJugador,
+                                     @RequestParam(name = "idCampeonato") Integer idCampeonato) {
         ControladorJugadores.getInstancia().getStatsByCampeonato(idJugador, idCampeonato);
     }
 
     @RequestMapping("/getStatsByClub")
-    public void getStatsByClub(@RequestParam(name = "idJugador") Integer idJugador, @RequestParam(name = "idClub") Integer idClub) {
+    public void getStatsByClub(@RequestParam(name = "idJugador") Integer idJugador,
+                               @RequestParam(name = "idClub") Integer idClub) {
         ControladorJugadores.getInstancia().getStatsByClub(idJugador, idClub);
     }
 
@@ -113,7 +123,8 @@ public class ControladorRestJugadores {
     }
 
     @RequestMapping("/getJugadoresHabilitadosByClubAndCategoria")
-    public List<JugadorVO> getJugadoresHabilitadosByClubAndCategoria(@RequestParam(name = "idClub") Integer idClub, @RequestParam(name = "categoria") int categoria) {
+    public List<JugadorVO> getJugadoresHabilitadosByClubAndCategoria(@RequestParam(name = "idClub") Integer idClub,
+                                                                     @RequestParam(name = "categoria") int categoria) {
         List<Jugador> jugadores = ControladorJugadores.getInstancia().getJugadoresHabilitadosCategoriaClub(idClub, categoria);
         List<JugadorVO> jugadoresVO = new ArrayList<>();
 
@@ -127,14 +138,16 @@ public class ControladorRestJugadores {
     }
 
     @RequestMapping("/getJugadorByDocumento")
-    public JugadorVO getJugadorByDocumento(@RequestParam(name = "documento") Integer documento, @RequestParam(name = "tipoDoc") String tipoDoc) throws JugadorException {
+    public JugadorVO getJugadorByDocumento(@RequestParam(name = "documento") Integer documento,
+                                           @RequestParam(name = "tipoDoc") String tipoDoc) throws JugadorException {
         Jugador jugador = ControladorJugadores.getInstancia().getJugadorByDocumento(documento, tipoDoc);
-        if (jugador == null) throw new JugadorException("No existe un jugador con numero de documento: " + documento);
+        if (jugador == null) throw new JugadorException("No existe un jugador con documento: " + tipoDoc + " y con numero de documento: " + documento);
         else return jugador.toVO();
     }
 
     @RequestMapping("/getJugadorByNombre")
-    public List<JugadorVO> getJugadorByNombre(@RequestParam(name = "nombre") String nombre, @RequestParam(name = "apellido") String apellido) {
+    public List<JugadorVO> getJugadorByNombre(@RequestParam(name = "nombre") String nombre,
+                                              @RequestParam(name = "apellido") String apellido) {
         List<Jugador> jugadores = ControladorJugadores.getInstancia().getJugadorByNombre(nombre, apellido);
         List<JugadorVO> jugadoresVO = new ArrayList<>();
 
