@@ -13,7 +13,7 @@ import java.util.List;
 public class ControladorRestClubes {
 
     @PostMapping("/crearClub")
-    public void crearClub(@RequestBody ClubVO club) {
+    public void crearClub(@RequestBody ClubVO club) throws ClubException {
         ControladorClubes.getInstancia().crearClub(club.getIdClub(), club.getNombre(), club.getDireccion());
     }
 
