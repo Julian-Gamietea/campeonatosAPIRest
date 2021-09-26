@@ -132,11 +132,10 @@ public class ControladorRestFaltas {
         return result;
     }
 
-    @RequestMapping("/getFaltasByJugadorAndPartidoAndTipoAndCampeonato")
-    public List<FaltaVO> getFaltasByJugadorAndPartidoAndTipoAndCampeonato(@RequestParam(name = "idJugador") Integer idJugador,
-                                                                          @RequestParam(name = "idPartido") Integer idPartido,
-                                                                          @RequestParam(name = "tipo") String tipo,
-                                                                          @RequestParam(name = "idCampeonato") Integer idCampeonato) {
+    @RequestMapping("/getFaltasByJugadorAndPartidoAndTipo")
+    public List<FaltaVO> getFaltasByJugadorAndPartidoAndTipo(@RequestParam(name = "idJugador") Integer idJugador,
+                                                             @RequestParam(name = "idPartido") Integer idPartido,
+                                                             @RequestParam(name = "tipo") String tipo) {
 
         List<Falta> lista = ControladorFaltas.getInstancia().getFaltasByJugadorAndPartidoAndTipo(idJugador, idPartido, tipo);
         List<FaltaVO> result = new ArrayList<>();
