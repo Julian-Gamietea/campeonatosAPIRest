@@ -13,11 +13,13 @@ import java.util.List;
 public class ControladorRestFaltas {
 
     @PostMapping("/cargarFalta")
-    public void cargarFalta(@RequestParam(name = "idJugador") Integer idJugador,
-                            @RequestParam(name = "idPartido") Integer idPartido,
-                            @RequestParam(name = "minuto") Integer minuto,
-                            @RequestParam(name = "tipo") String tipo) {
-        ControladorFaltas.getInstancia().cargarFalta(idJugador, idPartido, minuto, tipo);
+    public Integer cargarFalta(@RequestParam(name = "idJugador") Integer idJugador,
+                               @RequestParam(name = "idPartido") Integer idPartido,
+                               @RequestParam(name = "minuto") Integer minuto,
+                               @RequestParam(name = "tipo") String tipo) throws FaltaException {
+        Integer id = ControladorFaltas.getInstancia().cargarFalta(idJugador, idPartido, minuto, tipo);
+        if (id == null) throw new FaltaException("No se pudo cargar la falta");
+        else return id;
     }
 
     @RequestMapping("/getFaltas")
