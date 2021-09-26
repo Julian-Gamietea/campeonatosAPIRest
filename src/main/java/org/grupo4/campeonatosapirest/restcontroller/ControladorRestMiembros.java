@@ -2,6 +2,7 @@ package org.grupo4.campeonatosapirest.restcontroller;
 
 import org.grupocuatro.controlador.ControladorFaltas;
 import org.grupocuatro.controlador.ControladorMiembros;
+import org.grupocuatro.excepciones.MiembroException;
 import org.grupocuatro.modelo.Miembro;
 import org.grupocuatro.vo.MiembroVO;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 @RestController
@@ -43,9 +45,8 @@ public class ControladorRestMiembros {
     }
 
     @RequestMapping("/getMiembroById")
-    public MiembroVO getMiembroById(@RequestParam(name = "idMiembro") Integer idMiembro) {
-        MiembroVO miembro = ControladorMiembros.getInstancia().getMiembroById(idMiembro).toVO();
-        return Objects.requireNonNullElseGet(miembro, MiembroVO::new);
+    public MiembroVO getMiembroById(@RequestParam(name = "idMiembro") Integer idMiembro) throws MiembroException {
+        return ControladorMiembros.getInstancia().getMiembroById(idMiembro).toVO();
     }
 
     @RequestMapping("/getMiembrosByClub")
