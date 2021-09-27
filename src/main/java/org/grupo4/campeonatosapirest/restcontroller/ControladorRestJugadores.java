@@ -3,14 +3,11 @@ package org.grupo4.campeonatosapirest.restcontroller;
 
 import org.grupocuatro.controlador.ControladorJugadores;
 import org.grupocuatro.excepciones.JugadorException;
-import org.grupocuatro.modelo.Jugador;
 import org.grupocuatro.vo.JugadorVO;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -38,24 +35,24 @@ public class ControladorRestJugadores {
 
     @PostMapping("/modificarDireccion")
     public void modificarDireccion(@RequestParam(name = "idJugador") Integer idJugador,
-                                   @RequestParam(name = "direccion") String direccion) {
+                                   @RequestParam(name = "direccion") String direccion) throws JugadorException {
         ControladorJugadores.getInstancia().modificarDireccion(idJugador, direccion);
     }
 
     @PostMapping("/modificarMail")
     public void modificarMail(@RequestParam(name = "idJugador") Integer idJugador,
-                              @RequestParam(name = "mail") String mail) {
+                              @RequestParam(name = "mail") String mail) throws JugadorException {
         ControladorJugadores.getInstancia().modificarMail(idJugador, mail);
     }
 
     @PostMapping("/modificarTelefono")
     public void modificarTelefono(@RequestParam(name = "idJugador") Integer idJugador,
-                                  @RequestParam(name = "telefono") String telefono) {
+                                  @RequestParam(name = "telefono") String telefono) throws JugadorException {
         ControladorJugadores.getInstancia().modificarTelefono(idJugador, telefono);
     }
 
     @PostMapping("/modificarEstado")
-    public void modificarEstado(@RequestParam(name = "idJugador") Integer idJugador) {
+    public void modificarEstado(@RequestParam(name = "idJugador") Integer idJugador) throws JugadorException {
         ControladorJugadores.getInstancia().modificarEstado(idJugador);
     }
 
