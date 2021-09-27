@@ -48,7 +48,7 @@ public class ControladorRestResponsables {
 
     @RequestMapping("/getResponsablesByClub")
     public List<ResponsableVO> getResponsablesByClub(@RequestParam(name = "idClub") Integer idClub) throws ResponsableException {
-        return  ControladorResponsables.getInstancia().getResponsablesByClub(idClub);
+        return ControladorResponsables.getInstancia().getResponsablesByClub(idClub);
 
     }
 

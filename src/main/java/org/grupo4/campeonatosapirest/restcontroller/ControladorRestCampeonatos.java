@@ -21,9 +21,9 @@ public class ControladorRestCampeonatos {
 
     @PostMapping("/crearCampeonato")
     public Integer crearCampeonato(@RequestParam(name = "descripcion") String descripcion,
-                                @RequestParam(name = "fechaInicio") String fechaInicioString,
-                                @RequestParam(name = "fechaFin") String fechaFinString,
-                                @RequestParam(name = "estado") String estado) throws CampeonatoException {
+                                   @RequestParam(name = "fechaInicio") String fechaInicioString,
+                                   @RequestParam(name = "fechaFin") String fechaFinString,
+                                   @RequestParam(name = "estado") String estado) throws CampeonatoException {
 
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/d");
         LocalDate fechaInicio = LocalDate.parse(fechaInicioString, formato);
@@ -71,7 +71,7 @@ public class ControladorRestCampeonatos {
 
     @RequestMapping("/getCampeonatosByClub")
     public List<CampeonatoVO> getCampeonatosByClub(@RequestParam(name = "idClub") Integer idClub) throws ClubesCampeonatoException {
-        return  ControladorCampeonatos.getInstancia().getCampeonatosByClub(idClub);
+        return ControladorCampeonatos.getInstancia().getCampeonatosByClub(idClub);
 
     }
 }

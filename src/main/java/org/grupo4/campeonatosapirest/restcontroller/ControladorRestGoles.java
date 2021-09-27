@@ -29,99 +29,49 @@ public class ControladorRestGoles {
     }
 
     @RequestMapping("/getGoles")
-    public List<GolVO> getGoles() {
-        List<Gol> lista = ControladorGoles.getInstancia().getGoles();
-        List<GolVO> result = new ArrayList<>();
+    public List<GolVO> getGoles() throws GolException {
+        return ControladorGoles.getInstancia().getGoles();
 
-        if (lista != null) {
-            for (Gol gol : lista) {
-                result.add(gol.toVO());
-            }
-        }
-
-        return result;
     }
 
     @RequestMapping("/getGolById")
     public GolVO getGolById(@RequestParam(name = "idGol") Integer idGol) throws GolException {
-        Gol gol = ControladorGoles.getInstancia().getGolById(idGol);
-        if (gol == null) throw new GolException("No existe un gol con id: " + idGol);
-        else return gol.toVO();
+        return ControladorGoles.getInstancia().getGolById(idGol);
 
     }
 
     @RequestMapping("/getGolesByPartido")
-    public List<GolVO> getGolesByPartido(@RequestParam(name = "idPartido") Integer idPartido) {
-        List<Gol> lista = ControladorGoles.getInstancia().getGolesByPartido(idPartido);
-        List<GolVO> result = new ArrayList<>();
+    public List<GolVO> getGolesByPartido(@RequestParam(name = "idPartido") Integer idPartido) throws GolException {
+        return ControladorGoles.getInstancia().getGolesByPartido(idPartido);
 
-        if (lista != null) {
-            for (Gol gol : lista) {
-                result.add(gol.toVO());
-            }
-        }
-
-        return result;
     }
 
     @RequestMapping("/getGolesByPartidoAndClub")
     public List<GolVO> getGolesByPartidoAndClub(@RequestParam(name = "idPartido") Integer idPartido,
                                                 @RequestParam(name = "idClubAContar") Integer idClubAContar,
-                                                @RequestParam(name = "idClubRival") Integer idClubRival) {
-        List<Gol> lista = ControladorGoles.getInstancia().getGolesByPartidoAndClub(idPartido, idClubAContar, idClubRival);
-        List<GolVO> result = new ArrayList<>();
+                                                @RequestParam(name = "idClubRival") Integer idClubRival) throws GolException {
+        return ControladorGoles.getInstancia().getGolesByPartidoAndClub(idPartido, idClubAContar, idClubRival);
 
-        if (lista != null) {
-            for (Gol gol : lista) {
-                result.add(gol.toVO());
-            }
-        }
-
-        return result;
     }
 
     @RequestMapping("/getGolesByPartidoAndSentido")
     public List<GolVO> getGolesByPartidoAndSentido(@RequestParam(name = "idPartido") Integer idPartido,
-                                                   @RequestParam(name = "sentido") String sentido) {
-        List<Gol> lista = ControladorGoles.getInstancia().getGolesByPartidoAndSentido(idPartido, sentido);
-        List<GolVO> result = new ArrayList<>();
+                                                   @RequestParam(name = "sentido") String sentido) throws GolException {
+        return ControladorGoles.getInstancia().getGolesByPartidoAndSentido(idPartido, sentido);
 
-        if (lista != null) {
-            for (Gol gol : lista) {
-                result.add(gol.toVO());
-            }
-        }
-
-        return result;
     }
 
     @RequestMapping("/getGolesByJugadorAndPartido")
     public List<GolVO> getGolesByJugadorAndPartido(@RequestParam(name = "idPartido") Integer idPartido,
-                                                   @RequestParam(name = "idJugador") Integer idJugador) {
-        List<Gol> lista = ControladorGoles.getInstancia().getGolesByJugadorAndPartido(idPartido, idJugador);
-        List<GolVO> result = new ArrayList<>();
+                                                   @RequestParam(name = "idJugador") Integer idJugador) throws GolException {
+        return ControladorGoles.getInstancia().getGolesByJugadorAndPartido(idPartido, idJugador);
 
-        if (lista != null) {
-            for (Gol gol : lista) {
-                result.add(gol.toVO());
-            }
-        }
-
-        return result;
     }
 
     @RequestMapping("/getGolesByJugador")
-    public List<GolVO> getGolesByJugador(@RequestParam(name = "idJugador") Integer idJugador) {
-        List<Gol> lista = ControladorGoles.getInstancia().getGolesByJugador(idJugador);
-        List<GolVO> result = new ArrayList<>();
+    public List<GolVO> getGolesByJugador(@RequestParam(name = "idJugador") Integer idJugador) throws GolException {
+        return ControladorGoles.getInstancia().getGolesByJugador(idJugador);
 
-        if (lista != null) {
-            for (Gol gol : lista) {
-                result.add(gol.toVO());
-            }
-        }
-
-        return result;
     }
 
 

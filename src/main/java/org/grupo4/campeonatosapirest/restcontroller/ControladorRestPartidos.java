@@ -3,6 +3,8 @@ package org.grupo4.campeonatosapirest.restcontroller;
 import org.grupocuatro.controlador.ControladorCampeonatos;
 import org.grupocuatro.controlador.ControladorClubes;
 import org.grupocuatro.controlador.ControladorPartidos;
+import org.grupocuatro.excepciones.CampeonatoException;
+import org.grupocuatro.excepciones.ClubException;
 import org.grupocuatro.excepciones.PartidoException;
 import org.grupocuatro.modelo.Campeonato;
 import org.grupocuatro.modelo.Club;
@@ -55,115 +57,63 @@ public class ControladorRestPartidos {
 
     @RequestMapping("/encontrarPartido")
     public PartidoVO encontrarPartido(@RequestParam(name = "idPartido") Integer idPartido) throws PartidoException {
-        Partido partido = ControladorPartidos.getInstancia().encontrarPartido(idPartido);
-        if (partido == null) throw new PartidoException("No existe un partido con id: " + idPartido);
-        else return partido.toVO();
+        return ControladorPartidos.getInstancia().encontrarPartido(idPartido);
+
     }
 
     @RequestMapping("/getAllPartidos")
-    public List<PartidoVO> getAllPartidos() {
-        List<Partido> partidos = ControladorPartidos.getInstancia().getAllPartidos();
-        List<PartidoVO> partidosVO = new ArrayList<>();
+    public List<PartidoVO> getAllPartidos() throws PartidoException {
+        return ControladorPartidos.getInstancia().getAllPartidos();
 
-        if (partidos != null) {
-            for (Partido partido : partidos)
-                partidosVO.add(partido.toVO());
-        }
-
-        return partidosVO;
     }
 
     @RequestMapping("/getPartidosByCategoria")
-    public List<PartidoVO> getPartidosByCategoria(@RequestParam(name = "categoria") int categoria) {
-        List<Partido> partidos = ControladorPartidos.getInstancia().getPartidosByCategoria(categoria);
-        List<PartidoVO> partidosVO = new ArrayList<>();
+    public List<PartidoVO> getPartidosByCategoria(@RequestParam(name = "categoria") int categoria) throws PartidoException {
+        return ControladorPartidos.getInstancia().getPartidosByCategoria(categoria);
 
-        if (partidos != null) {
-            for (Partido partido : partidos)
-                partidosVO.add(partido.toVO());
-        }
-
-        return partidosVO;
     }
 
     @RequestMapping("/getUltimoPartidoByClubAndCampeonato")
     public PartidoVO getUltimoPartidoByClubAndCampeonato(@RequestParam(name = "idClub") Integer idClub,
                                                          @RequestParam(name = "idCampeonato") Integer idCampeonato,
-                                                         @RequestParam(name = "nroFechaActual") int nroFechaActual) throws PartidoException {
-        Club club = ControladorClubes.getInstancia().getClubById(idClub);
-        Campeonato campeonato = ControladorCampeonatos.getInstancia().encontrarCampeonato(idCampeonato);
-        Partido partido = ControladorPartidos.getInstancia().getUltimoPartidoByClubAndCampeonato(club.getIdClub(), campeonato.getIdCampeonato(), nroFechaActual);
-        if (partido == null)
-            throw new PartidoException("El club: " + idClub + " no aun no jugó partidos en el campeonato: " + idCampeonato);
-        else return partido.toVO();
+                                                         @RequestParam(name = "nroFechaActual") int nroFechaActual) throws PartidoException, CampeonatoException, ClubException {
+        Club club = ControladorClubes.getInstancia().getClubById(idClub).toModelo();
+        Campeonato campeonato = ControladorCampeonatos.getInstancia().encontrarCampeonato(idCampeonato).toModelo();
+        return ControladorPartidos.getInstancia().getUltimoPartidoByClubAndCampeonato(club.getIdClub(), campeonato.getIdCampeonato(), nroFechaActual);
+
     }
 
     @RequestMapping("/getPartidosByNroZona")
-    public List<PartidoVO> getPartidosByNroZona(@RequestParam(name = "nroZona") int nroZona) {
-        List<Partido> partidos = ControladorPartidos.getInstancia().getPartidosByNroZona(nroZona);
-        List<PartidoVO> partidosVO = new ArrayList<>();
+    public List<PartidoVO> getPartidosByNroZona(@RequestParam(name = "nroZona") int nroZona) throws PartidoException {
+        return ControladorPartidos.getInstancia().getPartidosByNroZona(nroZona);
 
-        if (partidos != null) {
-            for (Partido partido : partidos)
-                partidosVO.add(partido.toVO());
-        }
-
-        return partidosVO;
     }
 
     @RequestMapping("/getPartidosByClubLocal")
-    public List<PartidoVO> getPartidosByClubLocal(@RequestParam(name = "idClub") int idClub) {
-        List<Partido> partidos = ControladorPartidos.getInstancia().getPartidosByClubLocal(idClub);
-        List<PartidoVO> partidosVO = new ArrayList<>();
+    public List<PartidoVO> getPartidosByClubLocal(@RequestParam(name = "idClub") int idClub) throws PartidoException {
+        return ControladorPartidos.getInstancia().getPartidosByClubLocal(idClub);
 
-        if (partidos != null) {
-            for (Partido partido : partidos)
-                partidosVO.add(partido.toVO());
-        }
-
-        return partidosVO;
     }
 
     @RequestMapping("/getPartidosByClubVisitante")
-    public List<PartidoVO> getPartidosByClubVisitante(@RequestParam(name = "idClub") int idClub) {
-        List<Partido> partidos = ControladorPartidos.getInstancia().getPartidosByClubVisitante(idClub);
-        List<PartidoVO> partidosVO = new ArrayList<>();
+    public List<PartidoVO> getPartidosByClubVisitante(@RequestParam(name = "idClub") int idClub) throws PartidoException {
+        return ControladorPartidos.getInstancia().getPartidosByClubVisitante(idClub);
 
-        if (partidos != null) {
-            for (Partido partido : partidos)
-                partidosVO.add(partido.toVO());
-        }
-
-        return partidosVO;
     }
 
     @RequestMapping("/getPartidosByNroFechaAndCampeonatoAndClub")
     public List<PartidoVO> getPartidosByNroFechaAndCampeonatoAndClub(@RequestParam(name = "idCampeonato") Integer idCampeonato,
                                                                      @RequestParam(name = "nroFecha") int nroFecha,
-                                                                     @RequestParam(name = "idClub") Integer idClub) {
-        List<Partido> partidos = ControladorPartidos.getInstancia().getPartidosByNroFechaAndCampeonatoAndClub(idCampeonato, nroFecha, idClub);
-        List<PartidoVO> partidosVO = new ArrayList<>();
+                                                                     @RequestParam(name = "idClub") Integer idClub) throws PartidoException {
+        return ControladorPartidos.getInstancia().getPartidosByNroFechaAndCampeonatoAndClub(idCampeonato, nroFecha, idClub);
 
-        if (partidos != null) {
-            for (Partido partido : partidos)
-                partidosVO.add(partido.toVO());
-        }
-
-        return partidosVO;
     }
 
     @RequestMapping("/getPartidosByNroFechaAndCampeonato")
     public List<PartidoVO> getPartidosByNroFechaAndCampeonato(@RequestParam(name = "idCampeonato") Integer idCampeonato,
-                                                              @RequestParam(name = "nroFecha") int nroFecha) {
-        List<Partido> partidos = ControladorPartidos.getInstancia().getPartidosByNroFechaAndCampeonato(idCampeonato, nroFecha);
-        List<PartidoVO> partidosVO = new ArrayList<>();
+                                                              @RequestParam(name = "nroFecha") int nroFecha) throws PartidoException {
+        return ControladorPartidos.getInstancia().getPartidosByNroFechaAndCampeonato(idCampeonato, nroFecha);
 
-        if (partidos != null) {
-            for (Partido partido : partidos)
-                partidosVO.add(partido.toVO());
-        }
-
-        return partidosVO;
     }
 
 

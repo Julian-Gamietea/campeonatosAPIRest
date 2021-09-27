@@ -1,6 +1,7 @@
 package org.grupo4.campeonatosapirest.restcontroller;
 
 import org.grupocuatro.excepciones.ClubException;
+import org.grupocuatro.excepciones.ClubesCampeonatoException;
 import org.grupocuatro.modelo.*;
 import org.grupocuatro.controlador.*;
 import org.grupocuatro.vo.ClubVO;
@@ -26,51 +27,25 @@ public class ControladorRestClubes {
 
     @RequestMapping("/getClubById")
     public ClubVO getClubById(@RequestParam(name = "idClub") Integer idClub) throws ClubException {
-        Club club = ControladorClubes.getInstancia().getClubById(idClub);
-        if (club == null) throw new ClubException("No existe un club con id: " + idClub);
-        else return club.toVO();
+        return ControladorClubes.getInstancia().getClubById(idClub);
     }
 
     @RequestMapping("/getClubes")
-    public List<ClubVO> getClubes() {
-        List<Club> clubes = ControladorClubes.getInstancia().getClubes();
-        List<ClubVO> clubesVOS = new ArrayList<>();
+    public List<ClubVO> getClubes() throws ClubException {
+        return ControladorClubes.getInstancia().getClubes();
 
-        if (clubes != null) {
-            for (Club c : clubes) {
-                clubesVOS.add(c.toVO());
-            }
-        }
-
-        return clubesVOS;
     }
 
     @RequestMapping("/getClubesByCampeonato")
-    public List<ClubVO> getClubesByCampeonato(@RequestParam(name = "idCampeonato") Integer idCampeonato) {
-        List<Club> clubes = ControladorClubes.getInstancia().getClubesByCampeonato(idCampeonato);
-        List<ClubVO> clubesVOS = new ArrayList<>();
+    public List<ClubVO> getClubesByCampeonato(@RequestParam(name = "idCampeonato") Integer idCampeonato) throws ClubesCampeonatoException {
+        return ControladorClubes.getInstancia().getClubesByCampeonato(idCampeonato);
 
-        if (clubes != null) {
-            for (Club c : clubes) {
-                clubesVOS.add(c.toVO());
-            }
-        }
-
-        return clubesVOS;
     }
 
     @RequestMapping("/getClubesHabilitadosPorCategoria")
-    public List<ClubVO> getClubesHabiltadosPorCategoria(@RequestParam(name = "categoria") int categoria) {
-        List<Club> clubes = ControladorClubes.getInstancia().getClubesHabiltadosPorCategoria(categoria);
-        List<ClubVO> clubesVOS = new ArrayList<>();
+    public List<ClubVO> getClubesHabiltadosPorCategoria(@RequestParam(name = "categoria") int categoria) throws ClubException {
+        return ControladorClubes.getInstancia().getClubesHabiltadosPorCategoria(categoria);
 
-        if (clubes != null) {
-            for (Club c : clubes) {
-                clubesVOS.add(c.toVO());
-            }
-        }
-
-        return clubesVOS;
     }
 
 
