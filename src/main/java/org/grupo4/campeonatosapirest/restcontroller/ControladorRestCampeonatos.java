@@ -2,7 +2,9 @@ package org.grupo4.campeonatosapirest.restcontroller;
 
 import org.grupocuatro.controlador.ControladorCampeonatos;
 import org.grupocuatro.excepciones.CampeonatoException;
+import org.grupocuatro.excepciones.ClubException;
 import org.grupocuatro.excepciones.ClubesCampeonatoException;
+import org.grupocuatro.excepciones.PartidoException;
 import org.grupocuatro.modelo.Campeonato;
 import org.grupocuatro.vo.CampeonatoVO;
 import org.grupocuatro.vo.ClubesCampeonatoVO;
@@ -36,13 +38,13 @@ public class ControladorRestCampeonatos {
     @PostMapping("/definirTipoCampeonatoAndCategoria")
     public void definirTipoCampeonatoAndCategoria(@RequestParam(name = "cantidadZonas") int cantidadZonas,
                                                   @RequestParam(name = "idCampeonato") Integer idCampeonato,
-                                                  @RequestParam(name = "categoria") int categoria) {
+                                                  @RequestParam(name = "categoria") int categoria) throws CampeonatoException, ClubesCampeonatoException, PartidoException, ClubException {
 
         ControladorCampeonatos.getInstancia().definirTipoCampeonatoAndCategoria(cantidadZonas, idCampeonato, categoria);
     }
 
     @PostMapping("/terminarCampeonato")
-    public void terminarCampeonato(@RequestParam(name = "idCampeonato") Integer idCampeonato) {
+    public void terminarCampeonato(@RequestParam(name = "idCampeonato") Integer idCampeonato) throws CampeonatoException {
         ControladorCampeonatos.getInstancia().terminarCampeonato(idCampeonato);
     }
 
@@ -65,7 +67,7 @@ public class ControladorRestCampeonatos {
 
     @PostMapping("/agregarClubACampeonato")
     public void agregarClubACampeonato(@RequestParam(name = "idClub") Integer idClub,
-                                       @RequestParam(name = "idCampeonato") Integer idCampeonato) {
+                                       @RequestParam(name = "idCampeonato") Integer idCampeonato) throws CampeonatoException, ClubException, ClubesCampeonatoException {
         ControladorCampeonatos.getInstancia().agregarClubACampeonato(idClub, idCampeonato);
     }
 
