@@ -41,6 +41,7 @@ public class ControladorRestCampeonatos {
                                                   @RequestParam(name = "categoria") int categoria) throws CampeonatoException, ClubesCampeonatoException, PartidoException, ClubException {
 
         ControladorCampeonatos.getInstancia().definirTipoCampeonatoAndCategoria(cantidadZonas, idCampeonato, categoria);
+
     }
 
     @PostMapping("/terminarCampeonato")
