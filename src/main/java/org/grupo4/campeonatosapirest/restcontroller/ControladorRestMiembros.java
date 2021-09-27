@@ -2,6 +2,7 @@ package org.grupo4.campeonatosapirest.restcontroller;
 
 import org.grupocuatro.controlador.ControladorMiembros;
 import org.grupocuatro.excepciones.*;
+import org.grupocuatro.modelo.Miembro;
 import org.grupocuatro.vo.MiembroVO;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ public class ControladorRestMiembros {
     @PostMapping("/agregarJugadoresEnLista")
     public void agregarJugadoresEnLista(@RequestParam(name = "idClub") Integer idClub,
                                         @RequestParam(name = "idPartido") Integer idPartido,
-                                        @RequestParam(name = "idJugador") Integer idJugador) throws JugadorException, FaltaException, ClubException, PartidoException {
+                                        @RequestParam(name = "idJugador") Integer idJugador) throws FaltaException, ClubException, PartidoException, JugadorException {
         ControladorMiembros.getInstancia().agregarJugadoresEnLista(idClub, idPartido, idJugador);
     }
 

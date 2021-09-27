@@ -47,7 +47,7 @@ public class ControladorRestJugadores {
 
     @PostMapping("/modificarTelefono")
     public void modificarTelefono(@RequestParam(name = "idJugador") Integer idJugador,
-                                  @RequestParam(name = "telefono") String telefono) throws JugadorException {
+                                  @RequestParam(name = "telefono") String telefono) throws JugadorException{
         ControladorJugadores.getInstancia().modificarTelefono(idJugador, telefono);
     }
 
