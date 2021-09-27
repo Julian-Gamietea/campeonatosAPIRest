@@ -29,44 +29,27 @@ public class ControladorRestResponsables {
 
     @RequestMapping("/getResponsableById")
     public ResponsableVO getResponsableById(@RequestParam(name = "idResponsable") Integer idResponsable) throws ResponsableException {
-        Responsable responsable = ControladorResponsables.getInstancia().getResponsable(idResponsable);
-        if (responsable == null) throw new ResponsableException("No existe un responsable con id: " + idResponsable);
-        else return responsable.toVO();
+        return ControladorResponsables.getInstancia().getResponsable(idResponsable);
+
     }
 
     @RequestMapping("/getResponsables")
-    public List<ResponsableVO> getResponsables() {
-        List<Responsable> responsables = ControladorResponsables.getInstancia().getResponsables();
-        List<ResponsableVO> responsablesVO = new ArrayList<>();
+    public List<ResponsableVO> getResponsables() throws ResponsableException {
+        return ControladorResponsables.getInstancia().getResponsables();
 
-        if (responsables != null) {
-            for (Responsable responsable : responsables)
-                responsablesVO.add(responsable.toVO());
-        }
-
-        return responsablesVO;
     }
 
     @RequestMapping("/getResponsableByNroDocAndClub")
     public ResponsableVO getResponsableByNroDocAndClub(@RequestParam(name = "nroDoc") Integer nroDoc,
                                                        @RequestParam(name = "idClub") Integer idClub) throws ResponsableException {
-        Responsable responsable = ControladorResponsables.getInstancia().getResponsableByNroDocAndClub(nroDoc, idClub);
-        if (responsable == null)
-            throw new ResponsableException("No existe un responsable con numero de documento: " + nroDoc + " para el club: " + idClub);
-        else return responsable.toVO();
+        return ControladorResponsables.getInstancia().getResponsableByNroDocAndClub(nroDoc, idClub);
+
     }
 
     @RequestMapping("/getResponsablesByClub")
-    public List<ResponsableVO> getResponsablesByClub(@RequestParam(name = "idClub") Integer idClub) {
-        List<Responsable> responsables = ControladorResponsables.getInstancia().getResponsablesByClub(idClub);
-        List<ResponsableVO> responsablesVO = new ArrayList<>();
+    public List<ResponsableVO> getResponsablesByClub(@RequestParam(name = "idClub") Integer idClub) throws ResponsableException {
+        return  ControladorResponsables.getInstancia().getResponsablesByClub(idClub);
 
-        if (responsables != null) {
-            for (Responsable responsable : responsables)
-                responsablesVO.add(responsable.toVO());
-        }
-
-        return responsablesVO;
     }
 
 

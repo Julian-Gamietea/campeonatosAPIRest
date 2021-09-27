@@ -2,6 +2,7 @@ package org.grupo4.campeonatosapirest.restcontroller;
 
 import org.grupocuatro.controlador.ControladorCampeonatos;
 import org.grupocuatro.excepciones.CampeonatoException;
+import org.grupocuatro.excepciones.ClubesCampeonatoException;
 import org.grupocuatro.modelo.Campeonato;
 import org.grupocuatro.vo.CampeonatoVO;
 import org.grupocuatro.vo.ClubesCampeonatoVO;
@@ -47,37 +48,19 @@ public class ControladorRestCampeonatos {
 
     @RequestMapping("/encontrarCampeonato")
     public CampeonatoVO encontrarCampeonato(@RequestParam(name = "idCampeonato") Integer idCampeonato) throws CampeonatoException {
-        Campeonato result = ControladorCampeonatos.getInstancia().encontrarCampeonato(idCampeonato);
-        if (result == null) throw new CampeonatoException("No existe un campeonato con id: " + idCampeonato);
-        else return result.toVO();
+        return ControladorCampeonatos.getInstancia().encontrarCampeonato(idCampeonato);
     }
 
     @RequestMapping("/getCampeonatos")
-    public List<CampeonatoVO> getCampeonatos() {
-        List<Campeonato> lista = ControladorCampeonatos.getInstancia().getCampeonatos();
-        List<CampeonatoVO> result = new ArrayList<>();
+    public List<CampeonatoVO> getCampeonatos() throws CampeonatoException {
+        return ControladorCampeonatos.getInstancia().getCampeonatos();
 
-        if (lista != null) {
-            for (Campeonato camp : lista) {
-                result.add(camp.toVO());
-            }
-        }
-
-        return result;
     }
 
     @RequestMapping("/getCampeonatosByEstado")
-    public List<CampeonatoVO> getCampeonatosByEstado(@RequestParam(name = "estado") String estado) {
-        List<Campeonato> lista = ControladorCampeonatos.getInstancia().getCampeonatosByEstado(estado);
-        List<CampeonatoVO> result = new ArrayList<>();
+    public List<CampeonatoVO> getCampeonatosByEstado(@RequestParam(name = "estado") String estado) throws CampeonatoException {
+        return ControladorCampeonatos.getInstancia().getCampeonatosByEstado(estado);
 
-        if (lista != null) {
-            for (Campeonato camp : lista) {
-                result.add(camp.toVO());
-            }
-        }
-
-        return result;
     }
 
     @PostMapping("/agregarClubACampeonato")
@@ -87,16 +70,8 @@ public class ControladorRestCampeonatos {
     }
 
     @RequestMapping("/getCampeonatosByClub")
-    public List<CampeonatoVO> getCampeonatosByClub(@RequestParam(name = "idClub") Integer idClub) {
-        List<Campeonato> lista = ControladorCampeonatos.getInstancia().getCampeonatosByClub(idClub);
-        List<CampeonatoVO> result = new ArrayList<>();
+    public List<CampeonatoVO> getCampeonatosByClub(@RequestParam(name = "idClub") Integer idClub) throws ClubesCampeonatoException {
+        return  ControladorCampeonatos.getInstancia().getCampeonatosByClub(idClub);
 
-        if (lista != null) {
-            for (Campeonato camp : lista) {
-                result.add(camp.toVO());
-            }
-        }
-
-        return result;
     }
 }

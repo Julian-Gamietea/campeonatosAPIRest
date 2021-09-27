@@ -23,157 +23,77 @@ public class ControladorRestFaltas {
     }
 
     @RequestMapping("/getFaltas")
-    public List<FaltaVO> getFaltas() {
-        List<Falta> lista = ControladorFaltas.getInstancia().getFaltas();
-        List<FaltaVO> result = new ArrayList<>();
+    public List<FaltaVO> getFaltas() throws FaltaException {
+        return ControladorFaltas.getInstancia().getFaltas();
 
-        if (lista != null) {
-            for (Falta falta : lista) {
-                result.add(falta.toVO());
-            }
-        }
-
-        return result;
     }
 
     @RequestMapping("/getFaltaById")
     public FaltaVO getFaltaById(@RequestParam(name = "id") Integer id) throws FaltaException {
-        Falta result = ControladorFaltas.getInstancia().getFaltaById(id);
-        if (result == null) throw new FaltaException("No existe una falta con id: " + id);
-        else return result.toVO();
+        return ControladorFaltas.getInstancia().getFaltaById(id);
     }
 
     @RequestMapping("/getFaltasPartido")
-    public List<FaltaVO> getFaltasPartido(@RequestParam(name = "idPartido") Integer idPartido) {
-        List<Falta> lista = ControladorFaltas.getInstancia().getFaltasPartido(idPartido);
-        List<FaltaVO> result = new ArrayList<>();
+    public List<FaltaVO> getFaltasPartido(@RequestParam(name = "idPartido") Integer idPartido) throws FaltaException {
+        return ControladorFaltas.getInstancia().getFaltasPartido(idPartido);
 
-        if (lista != null) {
-            for (Falta falta : lista) {
-                result.add(falta.toVO());
-            }
-        }
-
-        return result;
     }
 
     @RequestMapping("/getFaltasByTipoAndPartido")
     public List<FaltaVO> getFaltasByTipoAndPartido(@RequestParam(name = "idPartido") Integer idPartido,
-                                                   @RequestParam(name = "tipo") String tipo) {
-        List<Falta> lista = ControladorFaltas.getInstancia().getFaltasByTipoAndPartido(idPartido, tipo);
-        List<FaltaVO> result = new ArrayList<>();
+                                                   @RequestParam(name = "tipo") String tipo) throws FaltaException {
+        return ControladorFaltas.getInstancia().getFaltasByTipoAndPartido(idPartido, tipo);
 
-        if (lista != null) {
-            for (Falta falta : lista) {
-                result.add(falta.toVO());
-            }
-        }
-
-        return result;
     }
 
     @RequestMapping("/getFaltasByCampeonato")
-    public List<FaltaVO> getFaltasByCampeonato(@RequestParam(name = "idCampeonato") Integer idCampeonato) {
-        List<Falta> lista = ControladorFaltas.getInstancia().getFaltasByCampeonato(idCampeonato);
-        List<FaltaVO> result = new ArrayList<>();
+    public List<FaltaVO> getFaltasByCampeonato(@RequestParam(name = "idCampeonato") Integer idCampeonato) throws FaltaException {
+        return ControladorFaltas.getInstancia().getFaltasByCampeonato(idCampeonato);
 
-        if (lista != null) {
-            for (Falta falta : lista) {
-                result.add(falta.toVO());
-            }
-        }
-
-        return result;
     }
 
     @RequestMapping("/getFaltasByJugadorAndPartido")
     public List<FaltaVO> getFaltasByJugadorAndPartido(@RequestParam(name = "idJugador") Integer idJugador,
-                                                      @RequestParam(name = "idPartido") Integer idPartido) {
-        List<Falta> lista = ControladorFaltas.getInstancia().getFaltasByJugadorAndPartido(idJugador, idPartido);
-        List<FaltaVO> result = new ArrayList<>();
+                                                      @RequestParam(name = "idPartido") Integer idPartido) throws FaltaException {
+        return ControladorFaltas.getInstancia().getFaltasByJugadorAndPartido(idJugador, idPartido);
 
-        if (lista != null) {
-            for (Falta falta : lista) {
-                result.add(falta.toVO());
-            }
-        }
-
-        return result;
     }
 
     @RequestMapping("/getFaltasByJugadorAndTipoAndPartido")
     public List<FaltaVO> getFaltasByJugadorAndTipoAndPartido(@RequestParam(name = "idJugador") Integer idJugador,
                                                              @RequestParam(name = "tipo") String tipo,
-                                                             @RequestParam(name = "idPartido") Integer idPartido) {
-        List<Falta> lista = ControladorFaltas.getInstancia().getFaltasByJugadorAndTipoAndPartido(idJugador, tipo, idPartido);
-        List<FaltaVO> result = new ArrayList<>();
+                                                             @RequestParam(name = "idPartido") Integer idPartido) throws FaltaException {
+        return ControladorFaltas.getInstancia().getFaltasByJugadorAndTipoAndPartido(idJugador, tipo, idPartido);
 
-        if (lista != null) {
-            for (Falta falta : lista) {
-                result.add(falta.toVO());
-            }
-        }
-
-        return result;
     }
 
     @RequestMapping("/getFaltasByJugadorAndCampeonato")
     public List<FaltaVO> getFaltasByJugadorAndCampeonato(@RequestParam(name = "idJugador") Integer idJugador,
-                                                         @RequestParam(name = "idCampeonato") Integer idCampeonato) {
-        List<Falta> lista = ControladorFaltas.getInstancia().getFaltasByJugadorAndCampeonato(idJugador, idCampeonato);
-        List<FaltaVO> result = new ArrayList<>();
+                                                         @RequestParam(name = "idCampeonato") Integer idCampeonato) throws FaltaException {
+        return ControladorFaltas.getInstancia().getFaltasByJugadorAndCampeonato(idJugador, idCampeonato);
 
-        if (lista != null) {
-            for (Falta falta : lista) {
-                result.add(falta.toVO());
-            }
-        }
-
-        return result;
     }
 
     @RequestMapping("/getFaltasByJugadorAndPartidoAndTipo")
     public List<FaltaVO> getFaltasByJugadorAndPartidoAndTipo(@RequestParam(name = "idJugador") Integer idJugador,
                                                              @RequestParam(name = "idPartido") Integer idPartido,
-                                                             @RequestParam(name = "tipo") String tipo) {
+                                                             @RequestParam(name = "tipo") String tipo) throws FaltaException {
 
-        List<Falta> lista = ControladorFaltas.getInstancia().getFaltasByJugadorAndPartidoAndTipo(idJugador, idPartido, tipo);
-        List<FaltaVO> result = new ArrayList<>();
+        return ControladorFaltas.getInstancia().getFaltasByJugadorAndPartidoAndTipo(idJugador, idPartido, tipo);
 
-        if (lista != null) {
-            for (Falta falta : lista) {
-                result.add(falta.toVO());
-            }
-        }
-
-        return result;
     }
 
     @RequestMapping("/getFaltasByJugador")
-    public List<FaltaVO> getFaltasByJugador(@RequestParam(name = "idJugador") Integer idJugador) {
-        List<Falta> lista = ControladorFaltas.getInstancia().getFaltasByJugador(idJugador);
-        List<FaltaVO> result = new ArrayList<>();
+    public List<FaltaVO> getFaltasByJugador(@RequestParam(name = "idJugador") Integer idJugador) throws FaltaException {
+        return ControladorFaltas.getInstancia().getFaltasByJugador(idJugador);
 
-        if (lista != null) {
-            for (Falta falta : lista) {
-                result.add(falta.toVO());
-            }
-        }
-
-        return result;
     }
 
     @RequestMapping("/getFaltasByTipo")
-    public List<FaltaVO> getFaltasByTipo(@RequestParam(name = "tipo") String tipo) {
-        List<Falta> lista = ControladorFaltas.getInstancia().getFaltasByTipo(tipo);
-        List<FaltaVO> result = new ArrayList<>();
+    public List<FaltaVO> getFaltasByTipo(@RequestParam(name = "tipo") String tipo) throws FaltaException {
+        return ControladorFaltas.getInstancia().getFaltasByTipo(tipo);
 
-        if (lista != null) {
-            for (Falta falta : lista) {
-                result.add(falta.toVO());
-            }
-        }
-
-        return result;
     }
+
+
 }
