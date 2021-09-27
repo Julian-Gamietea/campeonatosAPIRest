@@ -40,17 +40,20 @@ public class ControladorRestPartidos {
     }
 
     @PostMapping("/cargarResultadosPartido")
-    public void cargarResultadosPartido(@RequestParam(name = "idPartido") Integer idPartido, @RequestParam(name = "incidentes") String incidentes) {
+    public void cargarResultadosPartido(@RequestParam(name = "idPartido") Integer idPartido,
+                                        @RequestParam(name = "incidentes") String incidentes) {
         ControladorPartidos.getInstancia().cargarResultadoPartido(idPartido, incidentes);
     }
 
     @PostMapping("/validadoByClubLocal")
-    public void validarByClubLocal(@RequestParam(name = "idClub") Integer idClub, @RequestParam(name = "idPartido") Integer idPartido) {
+    public void validarByClubLocal(@RequestParam(name = "idClub") Integer idClub,
+                                   @RequestParam(name = "idPartido") Integer idPartido) {
         ControladorPartidos.getInstancia().validadoPorClubLocal(idClub, idPartido);
     }
 
     @PostMapping("/validadoByClubVisitante")
-    public void validarByClubVisitante(@RequestParam(name = "idClub") Integer idClub, @RequestParam(name = "idPartido") Integer idPartido) {
+    public void validarByClubVisitante(@RequestParam(name = "idClub") Integer idClub,
+                                       @RequestParam(name = "idPartido") Integer idPartido) {
         ControladorPartidos.getInstancia().validadoPorClubVisitante(idClub, idPartido);
     }
 
