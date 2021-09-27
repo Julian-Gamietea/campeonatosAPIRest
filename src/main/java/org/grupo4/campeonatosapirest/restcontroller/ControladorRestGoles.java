@@ -1,13 +1,12 @@
 package org.grupo4.campeonatosapirest.restcontroller;
 
-import org.grupocuatro.controlador.ControladorFaltas;
 import org.grupocuatro.controlador.ControladorGoles;
 import org.grupocuatro.excepciones.GolException;
-import org.grupocuatro.modelo.Gol;
+import org.grupocuatro.excepciones.JugadorException;
+import org.grupocuatro.excepciones.PartidoException;
 import org.grupocuatro.vo.GolVO;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,13 +16,13 @@ public class ControladorRestGoles {
     public void cargarGol(@RequestParam(name = "idJugador") Integer idJugador,
                           @RequestParam(name = "idPartido") Integer idPartido,
                           @RequestParam(name = "minuto") int minuto,
-                          @RequestParam(name = "tipo") String tipo) {
+                          @RequestParam(name = "tipo") String tipo) throws PartidoException, JugadorException {
         ControladorGoles.getInstancia().cargarGol(idJugador, idPartido, minuto, tipo);
     }
 
     @RequestMapping("/contarCantidadGoles")
     public int contarCantidadGoles(@RequestParam(name = "idClub") Integer idClub,
-                                   @RequestParam(name = "idPartido") Integer idPartido) {
+                                   @RequestParam(name = "idPartido") Integer idPartido) throws PartidoException {
         return ControladorGoles.getInstancia().contarCantidadGoles(idClub, idPartido);
 
     }

@@ -2,13 +2,9 @@ package org.grupo4.campeonatosapirest.restcontroller;
 
 import org.grupocuatro.controlador.ControladorResponsables;
 import org.grupocuatro.excepciones.ResponsableException;
-import org.grupocuatro.modelo.Responsable;
 import org.grupocuatro.vo.ResponsableVO;
 import org.springframework.web.bind.annotation.*;
-
 import javax.management.relation.RelationServiceNotRegisteredException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @RestController

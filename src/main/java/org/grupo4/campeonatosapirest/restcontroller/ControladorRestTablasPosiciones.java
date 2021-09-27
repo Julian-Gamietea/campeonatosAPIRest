@@ -2,13 +2,11 @@ package org.grupo4.campeonatosapirest.restcontroller;
 
 import org.grupocuatro.controlador.ControladorTablasPosiciones;
 import org.grupocuatro.excepciones.TablaPosicionException;
-import org.grupocuatro.modelo.TablaPosiciones;
 import org.grupocuatro.vo.TablaPosicionesVO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

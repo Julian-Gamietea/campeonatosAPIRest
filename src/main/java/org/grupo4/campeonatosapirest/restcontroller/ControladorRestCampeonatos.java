@@ -3,17 +3,11 @@ package org.grupo4.campeonatosapirest.restcontroller;
 import org.grupocuatro.controlador.ControladorCampeonatos;
 import org.grupocuatro.excepciones.CampeonatoException;
 import org.grupocuatro.excepciones.ClubesCampeonatoException;
-import org.grupocuatro.modelo.Campeonato;
 import org.grupocuatro.vo.CampeonatoVO;
-import org.grupocuatro.vo.ClubesCampeonatoVO;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.ldap.Control;
-import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -36,7 +30,7 @@ public class ControladorRestCampeonatos {
     @PostMapping("/definirTipoCampeonatoAndCategoria")
     public void definirTipoCampeonatoAndCategoria(@RequestParam(name = "cantidadZonas") int cantidadZonas,
                                                   @RequestParam(name = "idCampeonato") Integer idCampeonato,
-                                                  @RequestParam(name = "categoria") int categoria) {
+                                                  @RequestParam(name = "categoria") int categoria) throws ClubesCampeonatoException {
 
         ControladorCampeonatos.getInstancia().definirTipoCampeonatoAndCategoria(cantidadZonas, idCampeonato, categoria);
     }
