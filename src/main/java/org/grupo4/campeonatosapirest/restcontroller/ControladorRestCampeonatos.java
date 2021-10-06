@@ -31,8 +31,7 @@ public class ControladorRestCampeonatos {
         LocalDate fechaInicio = LocalDate.parse(fechaInicioString, formato);
         LocalDate fechaFin = LocalDate.parse(fechaFinString, formato);
         Integer id = ControladorCampeonatos.getInstancia().crearCampeonato(descripcion, fechaInicio, fechaFin, estado);
-        if (id == null) throw new CampeonatoException("El campeonato que se esta intentando crear ya existe");
-        else return id;
+        return id;
     }
 
     @PostMapping("/definirTipoCampeonatoAndCategoria")
