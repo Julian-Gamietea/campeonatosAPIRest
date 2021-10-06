@@ -3,9 +3,7 @@ package org.grupo4.campeonatosapirest.restcontroller;
 import org.grupocuatro.controlador.ControladorCampeonatos;
 import org.grupocuatro.controlador.ControladorClubes;
 import org.grupocuatro.controlador.ControladorPartidos;
-import org.grupocuatro.excepciones.CampeonatoException;
-import org.grupocuatro.excepciones.ClubException;
-import org.grupocuatro.excepciones.PartidoException;
+import org.grupocuatro.excepciones.*;
 import org.grupocuatro.modelo.Campeonato;
 import org.grupocuatro.modelo.Club;
 import org.grupocuatro.modelo.Partido;
@@ -41,19 +39,19 @@ public class ControladorRestPartidos {
 
     @PostMapping("/cargarResultadosPartido")
     public void cargarResultadosPartido(@RequestParam(name = "idPartido") Integer idPartido,
-                                        @RequestParam(name = "incidentes") String incidentes) throws PartidoException {
+                                        @RequestParam(name = "incidentes") String incidentes) throws PartidoException, GolException {
         ControladorPartidos.getInstancia().cargarResultadoPartido(idPartido, incidentes);
     }
 
     @PostMapping("/validadoByClubLocal")
     public void validarByClubLocal(@RequestParam(name = "idClub") Integer idClub,
-                                   @RequestParam(name = "idPartido") Integer idPartido) throws CampeonatoException, ClubException, PartidoException {
+                                   @RequestParam(name = "idPartido") Integer idPartido) throws CampeonatoException, ClubException, PartidoException, TablaPosicionException {
         ControladorPartidos.getInstancia().validadoPorClubLocal(idClub, idPartido);
     }
 
     @PostMapping("/validadoByClubVisitante")
     public void validarByClubVisitante(@RequestParam(name = "idClub") Integer idClub,
-                                       @RequestParam(name = "idPartido") Integer idPartido) throws PartidoException, CampeonatoException, ClubException {
+                                       @RequestParam(name = "idPartido") Integer idPartido) throws PartidoException, CampeonatoException, ClubException, TablaPosicionException {
         ControladorPartidos.getInstancia().validadoPorClubVisitante(idClub, idPartido);
     }
 
