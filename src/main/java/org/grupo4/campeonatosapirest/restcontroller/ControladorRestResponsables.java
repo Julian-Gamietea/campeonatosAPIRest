@@ -1,6 +1,7 @@
 package org.grupo4.campeonatosapirest.restcontroller;
 
 import org.grupocuatro.controlador.ControladorResponsables;
+import org.grupocuatro.excepciones.ClubException;
 import org.grupocuatro.excepciones.ResponsableException;
 import org.grupocuatro.vo.ResponsableVO;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,7 @@ import java.util.List;
 public class ControladorRestResponsables {
 
     @PostMapping("/crearResponsable")
-    public Integer crearResponsable(@RequestBody ResponsableVO responsable) {
+    public Integer crearResponsable(@RequestBody ResponsableVO responsable) throws ClubException, ResponsableException {
         return ControladorResponsables.getInstancia().crearResponsable(responsable.getDocumento(), responsable.getNombre(), responsable.getClub().getIdClub());
     }
 
@@ -19,7 +20,7 @@ public class ControladorRestResponsables {
     public void modificarResponsable(@RequestParam(name = "legajo") Integer legajo,
                                      @RequestParam(name = "documento") Integer documento,
                                      @RequestParam(name = "nombre") String nombre,
-                                     @RequestParam(name = "idClub") Integer idClub) {
+                                     @RequestParam(name = "idClub") Integer idClub) throws ClubException, ResponsableException {
         ControladorResponsables.getInstancia().modificarResponsable(legajo, documento, nombre, idClub);
     }
 
