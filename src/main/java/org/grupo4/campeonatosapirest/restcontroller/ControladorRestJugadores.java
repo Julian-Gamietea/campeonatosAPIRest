@@ -64,13 +64,13 @@ public class ControladorRestJugadores {
 
     }
 
-    //TODO estaria bueno ver como devolver las estadisticas
     @RequestMapping("/getStatsByCampeonato")
     public StatsVO getStatsByCampeonato(@RequestParam(name = "idJugador") Integer idJugador,
                                         @RequestParam(name = "idCampeonato") Integer idCampeonato) throws CampeonatoException, PartidoException, JugadorException {
         return ControladorJugadores.getInstancia().getStatsByCampeonato(idJugador, idCampeonato);
     }
 
+    //FIXME Cuando se llama a esto en el Postman, devuelve los campos de campeonatos como null, así que habría que arreglar eso.
     @RequestMapping("/getStatsByClub")
     public StatsVO getStatsByClub(@RequestParam(name = "idJugador") Integer idJugador,
                                @RequestParam(name = "idClub") Integer idClub) throws ClubException, PartidoException, JugadorException {
