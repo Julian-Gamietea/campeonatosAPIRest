@@ -2,9 +2,12 @@ package org.grupo4.campeonatosapirest.restcontroller;
 
 
 import org.grupocuatro.controlador.ControladorJugadores;
+import org.grupocuatro.excepciones.CampeonatoException;
 import org.grupocuatro.excepciones.ClubException;
 import org.grupocuatro.excepciones.JugadorException;
+import org.grupocuatro.excepciones.PartidoException;
 import org.grupocuatro.vo.JugadorVO;
+import org.grupocuatro.vo.StatsVO;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -63,15 +66,15 @@ public class ControladorRestJugadores {
 
     //TODO estaria bueno ver como devolver las estadisticas
     @RequestMapping("/getStatsByCampeonato")
-    public void getStatsByCampeonato(@RequestParam(name = "idJugador") Integer idJugador,
-                                     @RequestParam(name = "idCampeonato") Integer idCampeonato) {
-        ControladorJugadores.getInstancia().getStatsByCampeonato(idJugador, idCampeonato);
+    public StatsVO getStatsByCampeonato(@RequestParam(name = "idJugador") Integer idJugador,
+                                        @RequestParam(name = "idCampeonato") Integer idCampeonato) throws CampeonatoException, PartidoException, JugadorException {
+        return ControladorJugadores.getInstancia().getStatsByCampeonato(idJugador, idCampeonato);
     }
 
     @RequestMapping("/getStatsByClub")
-    public void getStatsByClub(@RequestParam(name = "idJugador") Integer idJugador,
-                               @RequestParam(name = "idClub") Integer idClub) {
-        ControladorJugadores.getInstancia().getStatsByClub(idJugador, idClub);
+    public StatsVO getStatsByClub(@RequestParam(name = "idJugador") Integer idJugador,
+                               @RequestParam(name = "idClub") Integer idClub) throws ClubException, PartidoException, JugadorException {
+        return ControladorJugadores.getInstancia().getStatsByClub(idJugador, idClub);
     }
 
     @RequestMapping("/getJugadores")
