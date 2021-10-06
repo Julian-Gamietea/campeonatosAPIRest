@@ -21,8 +21,7 @@ public class ControladorRestFaltas {
                                @RequestParam(name = "minuto") Integer minuto,
                                @RequestParam(name = "tipo") String tipo) throws FaltaException, PartidoException, JugadorException, MiembroException {
         Integer id = ControladorFaltas.getInstancia().cargarFalta(idJugador, idPartido, minuto, tipo);
-        if (id == null) throw new FaltaException("No se pudo cargar la falta");
-        else return id;
+        return id;
     }
 
     @RequestMapping("/getFaltas")
