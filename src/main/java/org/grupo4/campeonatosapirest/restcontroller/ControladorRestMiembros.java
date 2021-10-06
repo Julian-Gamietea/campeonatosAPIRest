@@ -15,14 +15,14 @@ public class ControladorRestMiembros {
     @PostMapping("/agregarJugadoresEnLista")
     public void agregarJugadoresEnLista(@RequestParam(name = "idClub") Integer idClub,
                                         @RequestParam(name = "idPartido") Integer idPartido,
-                                        @RequestParam(name = "idJugador") Integer idJugador) throws FaltaException, ClubException, PartidoException, JugadorException {
+                                        @RequestParam(name = "idJugador") Integer idJugador) throws FaltaException, ClubException, PartidoException, JugadorException, MiembroException {
         ControladorMiembros.getInstancia().agregarJugadoresEnLista(idClub, idPartido, idJugador);
     }
 
     @PostMapping("/definirIngresoEgreso")
     public void definirIngresoEgreso(@RequestParam(name = "idMiembro") Integer idMiembro,
                                      @RequestParam(name = "ingreso") int ingreso,
-                                     @RequestParam(name = "egreso") int egreso) {
+                                     @RequestParam(name = "egreso") int egreso) throws MiembroException {
         ControladorMiembros.getInstancia().definirIngresoEgreso(idMiembro, ingreso, egreso);
     }
 
