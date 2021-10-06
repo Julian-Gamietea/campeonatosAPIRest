@@ -2,6 +2,7 @@ package org.grupo4.campeonatosapirest.restcontroller;
 
 
 import org.grupocuatro.controlador.ControladorJugadores;
+import org.grupocuatro.excepciones.ClubException;
 import org.grupocuatro.excepciones.JugadorException;
 import org.grupocuatro.vo.JugadorVO;
 import org.springframework.web.bind.annotation.*;
@@ -22,15 +23,12 @@ public class ControladorRestJugadores {
                                 @RequestParam(name = "fechaNac") String fechaNacString,
                                 @RequestParam(name = "direccion") String direccion,
                                 @RequestParam(name = "mail") String mail,
-                                @RequestParam(name = "telefono") String telefono) throws JugadorException {
+                                @RequestParam(name = "telefono") String telefono) throws JugadorException, ClubException {
 
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/d");
         LocalDate fechaNac = LocalDate.parse(fechaNacString, formato);
         Integer id = ControladorJugadores.getInstancia().agregarJugador(tipoDoc, documento, nombre, apellido, idClub, fechaNac, direccion, mail, telefono);
-        if (id == null)
-            throw new JugadorException("Ya existe un jugador con documento: " + tipoDoc + " y numero de documento: " + documento);
-            //como se van a mostrar un listado de los clubes, no sera necesario chequear que el club sea valido
-        else return id;
+        return id;
     }
 
     @PostMapping("/modificarDireccion")
