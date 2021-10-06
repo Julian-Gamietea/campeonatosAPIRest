@@ -9,6 +9,7 @@ import org.grupocuatro.modelo.Falta;
 import org.grupocuatro.vo.FaltaVO;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,9 +19,10 @@ public class ControladorRestFaltas {
     public Integer cargarFalta(@RequestParam(name = "idJugador") Integer idJugador,
                                @RequestParam(name = "idPartido") Integer idPartido,
                                @RequestParam(name = "minuto") Integer minuto,
-                               @RequestParam(name = "tipo") String tipo) throws PartidoException, JugadorException, MiembroException {
-        return ControladorFaltas.getInstancia().cargarFalta(idJugador, idPartido, minuto, tipo);
-
+                               @RequestParam(name = "tipo") String tipo) throws FaltaException, PartidoException, JugadorException, MiembroException {
+        Integer id = ControladorFaltas.getInstancia().cargarFalta(idJugador, idPartido, minuto, tipo);
+        if (id == null) throw new FaltaException("No se pudo cargar la falta");
+        else return id;
     }
 
     @RequestMapping("/getFaltas")
