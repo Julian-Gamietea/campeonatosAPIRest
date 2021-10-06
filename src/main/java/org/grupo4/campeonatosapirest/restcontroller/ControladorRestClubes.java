@@ -20,7 +20,7 @@ public class ControladorRestClubes {
     @PostMapping("/modificarClub")
     public void modificarClub(@RequestParam(name = "idClub") Integer idClub,
                               @RequestParam(name = "nombre") String nombre,
-                              @RequestParam(name = "direccion") String direccion) {
+                              @RequestParam(name = "direccion") String direccion) throws ClubException {
         ControladorClubes.getInstancia().modificarClub(idClub, nombre, direccion);
     }
 
