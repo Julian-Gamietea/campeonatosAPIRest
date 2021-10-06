@@ -21,12 +21,12 @@ import java.util.List;
 public class ControladorRestPartidos {
 
     @PostMapping("/crearPartido")
-    public Integer crearPartido(@RequestBody PartidoVO partido) throws CampeonatoException, ClubException, PartidoException {
-        return ControladorPartidos.getInstancia().crearPartido(partido.getNroZona(),
-                partido.getCategoria(),
-                partido.getClubLocal().getIdClub(),
-                partido.getClubVisitante().getIdClub(),
-                partido.getCampeonato().getIdCampeonato());
+    public Integer crearPartido(@RequestParam(name = "nroZona") int nroZona,
+                                @RequestParam(name = "categoria") int categoria,
+                                @RequestParam(name = "idClubLocal") Integer idClubLocal,
+                                @RequestParam(name = "idClubVisitante") Integer idClubVisitante,
+                                @RequestParam(name = "idCampeonato") Integer idCampeonato) throws CampeonatoException, ClubException, PartidoException {
+        return ControladorPartidos.getInstancia().crearPartido(nroZona, categoria, idClubLocal, idClubVisitante, idCampeonato);
     }
 
     @PostMapping("/cargarFechaAndHoraPartido")
