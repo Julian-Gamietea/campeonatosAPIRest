@@ -22,7 +22,7 @@ public class ControladorRestGoles {
 
     @RequestMapping("/contarCantidadGoles")
     public int contarCantidadGoles(@RequestParam(name = "idClub") Integer idClub,
-                                   @RequestParam(name = "idPartido") Integer idPartido) throws PartidoException {
+                                   @RequestParam(name = "idPartido") Integer idPartido) throws PartidoException, GolException {
         return ControladorGoles.getInstancia().contarCantidadGoles(idClub, idPartido);
 
     }
