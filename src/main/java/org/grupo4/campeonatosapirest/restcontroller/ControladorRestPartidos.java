@@ -117,6 +117,11 @@ public class ControladorRestPartidos {
 
     }
 
+    @RequestMapping("/getPartidosByCampeonato")
+    public List<PartidoVO> getPartidosByCampeonato(@RequestParam(name = "idCampeonato") Integer idCampeonato) throws PartidoException {
+        return ControladorPartidos.getInstancia().getPartidosByCampeonato(idCampeonato);
+    }
+
 
 }
 
