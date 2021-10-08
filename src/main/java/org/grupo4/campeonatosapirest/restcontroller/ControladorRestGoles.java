@@ -16,7 +16,7 @@ public class ControladorRestGoles {
     public void cargarGol(@RequestParam(name = "idJugador") Integer idJugador,
                           @RequestParam(name = "idPartido") Integer idPartido,
                           @RequestParam(name = "minuto") int minuto,
-                          @RequestParam(name = "tipo") String tipo) throws PartidoException, JugadorException {
+                          @RequestParam(name = "tipo") String tipo) throws PartidoException, JugadorException, GolException {
         ControladorGoles.getInstancia().cargarGol(idJugador, idPartido, minuto, tipo);
     }
 
