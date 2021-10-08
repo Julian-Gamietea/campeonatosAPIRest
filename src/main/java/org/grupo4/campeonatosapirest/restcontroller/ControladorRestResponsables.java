@@ -12,16 +12,17 @@ import java.util.List;
 public class ControladorRestResponsables {
 
     @PostMapping("/crearResponsable")
-    public Integer crearResponsable(@RequestBody ResponsableVO responsable) throws ClubException, ResponsableException {
-        return ControladorResponsables.getInstancia().crearResponsable(responsable.getDocumento(), responsable.getNombre(), responsable.getClub().getIdClub());
+    public Integer crearResponsable(@RequestParam(name = "documento") int documento,
+                                    @RequestParam(name = "nombre") String nombre,
+                                    @RequestParam(name = "idClub") Integer idClub) throws ClubException, ResponsableException {
+        return ControladorResponsables.getInstancia().crearResponsable(documento, nombre, idClub);
     }
 
     @PostMapping("/modificarResponsable")
     public void modificarResponsable(@RequestParam(name = "legajo") Integer legajo,
-                                     @RequestParam(name = "documento") Integer documento,
                                      @RequestParam(name = "nombre") String nombre,
                                      @RequestParam(name = "idClub") Integer idClub) throws ClubException, ResponsableException {
-        ControladorResponsables.getInstancia().modificarResponsable(legajo, documento, nombre, idClub);
+        ControladorResponsables.getInstancia().modificarResponsable(legajo, nombre, idClub);
     }
 
     @RequestMapping("/getResponsableById")
