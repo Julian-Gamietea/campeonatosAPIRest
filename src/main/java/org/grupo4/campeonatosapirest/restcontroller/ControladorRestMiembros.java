@@ -7,6 +7,7 @@ import org.grupocuatro.vo.MiembroVO;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -68,7 +69,9 @@ public class ControladorRestMiembros {
 
     @RequestMapping("/getMiembroByJugadorAndFecha")
     public List<MiembroVO> getMiembroByJugadorAndFecha(@RequestParam(name = "idJugador") Integer idJugador,
-                                                       @RequestParam(name = "fecha") LocalDate fecha) throws MiembroException {
+                                                       @RequestParam(name = "fecha") String fechaString) throws MiembroException {
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/d");
+        LocalDate fecha = LocalDate.parse(fechaString, formato);
         return ControladorMiembros.getInstancia().getMiembroByJugadorAndFecha(idJugador, fecha);
 
     }
