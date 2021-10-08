@@ -3,6 +3,7 @@ package org.grupo4.campeonatosapirest.restcontroller;
 import org.grupocuatro.controlador.ControladorGoles;
 import org.grupocuatro.excepciones.GolException;
 import org.grupocuatro.excepciones.JugadorException;
+import org.grupocuatro.excepciones.MiembroException;
 import org.grupocuatro.excepciones.PartidoException;
 import org.grupocuatro.vo.GolVO;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class ControladorRestGoles {
     public void cargarGol(@RequestParam(name = "idJugador") Integer idJugador,
                           @RequestParam(name = "idPartido") Integer idPartido,
                           @RequestParam(name = "minuto") int minuto,
-                          @RequestParam(name = "tipo") String tipo) throws PartidoException, JugadorException, GolException {
+                          @RequestParam(name = "tipo") String tipo) throws PartidoException, JugadorException, GolException, MiembroException {
         ControladorGoles.getInstancia().cargarGol(idJugador, idPartido, minuto, tipo);
     }
 
