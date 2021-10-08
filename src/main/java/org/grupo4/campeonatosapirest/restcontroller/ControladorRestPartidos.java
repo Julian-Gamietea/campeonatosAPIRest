@@ -84,22 +84,35 @@ public class ControladorRestPartidos {
 
     }
 
-    @RequestMapping("/getPartidosByNroZona")
-    public List<PartidoVO> getPartidosByNroZona(@RequestParam(name = "nroZona") int nroZona) throws PartidoException {
-        return ControladorPartidos.getInstancia().getPartidosByNroZona(nroZona);
+    @RequestMapping("/getPartidosByCampeonatoAndNroZona")
+    public List<PartidoVO> getPartidosByNroZona(@RequestParam(name = "nroZona") int nroZona,
+                                                @RequestParam(name = "idCampeonato") Integer idCampeonato) throws PartidoException {
+        return ControladorPartidos.getInstancia().getPartidosByCampeonatoAndNroZona(nroZona, idCampeonato);
 
     }
 
     @RequestMapping("/getPartidosByClubLocal")
-    public List<PartidoVO> getPartidosByClubLocal(@RequestParam(name = "idClub") int idClub) throws PartidoException {
+    public List<PartidoVO> getPartidosByClubLocal(@RequestParam(name = "idClub") Integer idClub) throws PartidoException {
         return ControladorPartidos.getInstancia().getPartidosByClubLocal(idClub);
 
     }
 
     @RequestMapping("/getPartidosByClubVisitante")
-    public List<PartidoVO> getPartidosByClubVisitante(@RequestParam(name = "idClub") int idClub) throws PartidoException {
+    public List<PartidoVO> getPartidosByClubVisitante(@RequestParam(name = "idClub") Integer idClub) throws PartidoException {
         return ControladorPartidos.getInstancia().getPartidosByClubVisitante(idClub);
 
+    }
+
+    @RequestMapping("/getPartidosByCampeonatoAndClubLocal")
+    public List<PartidoVO> getPartidosByCampeonatoAndClubLocal(@RequestParam(name = "idCampeonato") Integer idCampeonato,
+                                                               @RequestParam(name = "idClub") Integer idClub) throws PartidoException {
+        return ControladorPartidos.getInstancia().getPartidosByCampeonatoAndClubLocal(idClub, idCampeonato);
+    }
+
+    @RequestMapping("/getPartidosByCampeonatoAndClubVisitante")
+    public List<PartidoVO> getPartidosByCampeonatoAndClubVisitante(@RequestParam(name = "idCampeonato") Integer idCampeonato,
+                                                               @RequestParam(name = "idClub") Integer idClub) throws PartidoException {
+        return ControladorPartidos.getInstancia().getPartidosByCampeonatoAndClubVisitante(idClub, idCampeonato);
     }
 
     @RequestMapping("/getPartidosByNroFechaAndCampeonatoAndClub")
