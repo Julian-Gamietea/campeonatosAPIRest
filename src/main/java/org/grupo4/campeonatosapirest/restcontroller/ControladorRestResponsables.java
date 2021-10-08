@@ -20,10 +20,9 @@ public class ControladorRestResponsables {
 
     @PostMapping("/modificarResponsable")
     public void modificarResponsable(@RequestParam(name = "legajo") Integer legajo,
-                                     @RequestParam(name = "documento") Integer documento,
                                      @RequestParam(name = "nombre") String nombre,
                                      @RequestParam(name = "idClub") Integer idClub) throws ClubException, ResponsableException {
-        ControladorResponsables.getInstancia().modificarResponsable(legajo, documento, nombre, idClub);
+        ControladorResponsables.getInstancia().modificarResponsable(legajo, nombre, idClub);
     }
 
     @RequestMapping("/getResponsableById")
