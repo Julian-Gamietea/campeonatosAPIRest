@@ -13,6 +13,7 @@ import org.grupocuatro.vo.PartidoVO;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,11 +30,13 @@ public class ControladorRestPartidos {
         return ControladorPartidos.getInstancia().crearPartido(nroZona, categoria, idClubLocal, idClubVisitante, idCampeonato);
     }
 
-    @PostMapping("/cargarFechaAndHoraPartido")
-    public void cargarFechaAndHoraPartido(@RequestParam(name = "idPartido") Integer idPartido,
+    @PostMapping("/cargarNroFechaYFechaPartido")
+    public void cargarNroFechaYFechaPartido(@RequestParam(name = "idPartido") Integer idPartido,
                                           @RequestParam(name = "nroFecha") int nroFecha,
-                                          @RequestParam(name = "fecha") LocalDate fecha) throws PartidoException {
+                                          @RequestParam(name = "fecha") String fechaString) throws PartidoException {
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/d");
+        LocalDate fecha = LocalDate.parse(fechaString, formatter);
         ControladorPartidos.getInstancia().cargarNroFechaYFecha(idPartido, nroFecha, fecha);
     }
 
