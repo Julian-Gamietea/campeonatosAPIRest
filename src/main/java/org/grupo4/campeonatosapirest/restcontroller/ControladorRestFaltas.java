@@ -73,7 +73,7 @@ public class ControladorRestFaltas {
                                                              @RequestParam(name = "idPartido") Integer idPartido,
                                                              @RequestParam(name = "tipo") String tipo) throws FaltaException {
 
-        return ControladorFaltas.getInstancia().getFaltasByJugadorAndPartidoAndTipo(idJugador, idPartido, tipo);
+        return ControladorFaltas.getInstancia().getFaltasByJugadorAndTipoAndPartido(idJugador, tipo, idPartido);
 
     }
 
