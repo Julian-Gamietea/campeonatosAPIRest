@@ -61,14 +61,6 @@ public class ControladorRestFaltas {
 
     }
 
-    @RequestMapping("/getFaltasByJugadorAndTipoAndPartido")
-    public List<FaltaVO> getFaltasByJugadorAndTipoAndPartido(@RequestParam(name = "idJugador") Integer idJugador,
-                                                             @RequestParam(name = "tipo") String tipo,
-                                                             @RequestParam(name = "idPartido") Integer idPartido) throws FaltaException {
-        return ControladorFaltas.getInstancia().getFaltasByJugadorAndTipoAndPartido(idJugador, tipo, idPartido);
-
-    }
-
     @RequestMapping("/getFaltasByJugadorAndCampeonato")
     public List<FaltaVO> getFaltasByJugadorAndCampeonato(@RequestParam(name = "idJugador") Integer idJugador,
                                                          @RequestParam(name = "idCampeonato") Integer idCampeonato) throws FaltaException {
