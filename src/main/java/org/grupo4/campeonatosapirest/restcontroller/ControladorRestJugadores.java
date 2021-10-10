@@ -70,7 +70,6 @@ public class ControladorRestJugadores {
         return ControladorJugadores.getInstancia().getStatsByCampeonato(idJugador, idCampeonato);
     }
 
-    //FIXME Cuando se llama a esto en el Postman, devuelve los campos de campeonatos como null, así que habría que arreglar eso.
     @RequestMapping("/getStatsByClub")
     public StatsVO getStatsByClub(@RequestParam(name = "idJugador") Integer idJugador,
                                @RequestParam(name = "idClub") Integer idClub) throws ClubException, PartidoException, JugadorException {
