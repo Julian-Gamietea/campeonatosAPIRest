@@ -29,6 +29,7 @@ public class ControladorRestClubes {
         return ControladorClubes.getInstancia().getClubById(idClub);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getClubes")
     public List<ClubVO> getClubes() throws ClubException {
         return ControladorClubes.getInstancia().getClubes();

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 @RestController
 public class ControladorRestCampeonatos {
 
@@ -70,6 +71,7 @@ public class ControladorRestCampeonatos {
         ControladorCampeonatos.getInstancia().agregarClubACampeonato(idClub, idCampeonato);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getCampeonatosByClub")
     public List<CampeonatoVO> getCampeonatosByClub(@RequestParam(name = "idClub") Integer idClub) throws ClubesCampeonatoException {
         return ControladorCampeonatos.getInstancia().getCampeonatosByClub(idClub);
