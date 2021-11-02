@@ -89,5 +89,11 @@ public class ControladorRestFaltas {
 
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/getFaltasByClubAndPartido")
+    public List<FaltaVO> getFaltasByClubAndPartido(@RequestParam(name = "idClub") Integer idClub,
+                                                   @RequestParam(name = "idPartido") Integer idPartido) {
+        return ControladorFaltas.getInstancia().getFaltasByClubAndPartido(idClub, idPartido);
+    }
 
 }
