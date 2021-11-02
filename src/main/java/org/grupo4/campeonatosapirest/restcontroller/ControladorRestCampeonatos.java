@@ -21,7 +21,7 @@ import java.util.List;
 
 @RestController
 public class ControladorRestCampeonatos {
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/crearCampeonato")
     public Integer crearCampeonato(@RequestParam(name = "descripcion") String descripcion,
                                    @RequestParam(name = "fechaInicio") String fechaInicioString,
@@ -34,7 +34,7 @@ public class ControladorRestCampeonatos {
         Integer id = ControladorCampeonatos.getInstancia().crearCampeonato(descripcion, fechaInicio, fechaFin, estado);
         return id;
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/definirTipoCampeonatoAndCategoria")
     public void definirTipoCampeonatoAndCategoria(@RequestParam(name = "cantidadZonas") int cantidadZonas,
                                                   @RequestParam(name = "idCampeonato") Integer idCampeonato,
@@ -42,29 +42,29 @@ public class ControladorRestCampeonatos {
 
         ControladorCampeonatos.getInstancia().definirTipoCampeonatoAndCategoria(cantidadZonas, idCampeonato, categoria);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/terminarCampeonato")
     public void terminarCampeonato(@RequestParam(name = "idCampeonato") Integer idCampeonato) throws CampeonatoException {
         ControladorCampeonatos.getInstancia().terminarCampeonato(idCampeonato);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/encontrarCampeonato")
     public CampeonatoVO encontrarCampeonato(@RequestParam(name = "idCampeonato") Integer idCampeonato) throws CampeonatoException {
         return ControladorCampeonatos.getInstancia().encontrarCampeonato(idCampeonato);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getCampeonatos")
     public List<CampeonatoVO> getCampeonatos() throws CampeonatoException {
         return ControladorCampeonatos.getInstancia().getCampeonatos();
 
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getCampeonatosByEstado")
     public List<CampeonatoVO> getCampeonatosByEstado(@RequestParam(name = "estado") String estado) throws CampeonatoException {
         return ControladorCampeonatos.getInstancia().getCampeonatosByEstado(estado);
 
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/agregarClubACampeonato")
     public void agregarClubACampeonato(@RequestParam(name = "idClub") Integer idClub,
                                        @RequestParam(name = "idCampeonato") Integer idCampeonato) throws CampeonatoException, ClubException, ClubesCampeonatoException {
