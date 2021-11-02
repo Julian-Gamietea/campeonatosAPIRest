@@ -62,13 +62,11 @@ public class ControladorRestPartidos {
     @RequestMapping("/encontrarPartido")
     public PartidoVO encontrarPartido(@RequestParam(name = "idPartido") Integer idPartido) throws PartidoException {
         return ControladorPartidos.getInstancia().encontrarPartido(idPartido);
-
     }
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getAllPartidos")
     public List<PartidoVO> getAllPartidos() throws PartidoException {
         return ControladorPartidos.getInstancia().getAllPartidos();
-
     }
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getPartidosByCategoria")
@@ -84,26 +82,22 @@ public class ControladorRestPartidos {
         Club club = ControladorClubes.getInstancia().getClubById(idClub).toModelo();
         Campeonato campeonato = ControladorCampeonatos.getInstancia().encontrarCampeonato(idCampeonato).toModelo();
         return ControladorPartidos.getInstancia().getUltimoPartidoByClubAndCampeonato(club.getIdClub(), campeonato.getIdCampeonato(), nroFechaActual);
-
     }
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getPartidosByCampeonatoAndNroZona")
     public List<PartidoVO> getPartidosByNroZona(@RequestParam(name = "nroZona") int nroZona,
                                                 @RequestParam(name = "idCampeonato") Integer idCampeonato) throws PartidoException {
         return ControladorPartidos.getInstancia().getPartidosByCampeonatoAndNroZona(nroZona, idCampeonato);
-
     }
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getPartidosByClubLocal")
     public List<PartidoVO> getPartidosByClubLocal(@RequestParam(name = "idClub") Integer idClub) throws PartidoException {
         return ControladorPartidos.getInstancia().getPartidosByClubLocal(idClub);
-
     }
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getPartidosByClubVisitante")
     public List<PartidoVO> getPartidosByClubVisitante(@RequestParam(name = "idClub") Integer idClub) throws PartidoException {
         return ControladorPartidos.getInstancia().getPartidosByClubVisitante(idClub);
-
     }
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getPartidosByCampeonatoAndClubLocal")
@@ -123,14 +117,12 @@ public class ControladorRestPartidos {
                                                                      @RequestParam(name = "nroFecha") int nroFecha,
                                                                      @RequestParam(name = "idClub") Integer idClub) throws PartidoException {
         return ControladorPartidos.getInstancia().getPartidosByNroFechaAndCampeonatoAndClub(idCampeonato, nroFecha, idClub);
-
     }
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getPartidosByNroFechaAndCampeonato")
     public List<PartidoVO> getPartidosByNroFechaAndCampeonato(@RequestParam(name = "idCampeonato") Integer idCampeonato,
                                                               @RequestParam(name = "nroFecha") int nroFecha) throws PartidoException {
         return ControladorPartidos.getInstancia().getPartidosByNroFechaAndCampeonato(idCampeonato, nroFecha);
-
     }
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getPartidosByCampeonato")
