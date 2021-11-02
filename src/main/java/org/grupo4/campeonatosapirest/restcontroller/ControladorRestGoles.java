@@ -1,108 +1,77 @@
 package org.grupo4.campeonatosapirest.restcontroller;
 
-import org.grupocuatro.controlador.ControladorFaltas;
 import org.grupocuatro.controlador.ControladorGoles;
-import org.grupocuatro.modelo.Gol;
+import org.grupocuatro.excepciones.GolException;
+import org.grupocuatro.excepciones.JugadorException;
+import org.grupocuatro.excepciones.MiembroException;
+import org.grupocuatro.excepciones.PartidoException;
 import org.grupocuatro.vo.GolVO;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class ControladorRestGoles {
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/cargarGol")
     public void cargarGol(@RequestParam(name = "idJugador") Integer idJugador,
                           @RequestParam(name = "idPartido") Integer idPartido,
                           @RequestParam(name = "minuto") int minuto,
-                          @RequestParam(name = "tipo") String tipo) {
+                          @RequestParam(name = "tipo") String tipo) throws PartidoException, JugadorException, GolException, MiembroException {
         ControladorGoles.getInstancia().cargarGol(idJugador, idPartido, minuto, tipo);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/contarCantidadGoles")
     public int contarCantidadGoles(@RequestParam(name = "idClub") Integer idClub,
-                                   @RequestParam(name = "idPartido") Integer idPartido) {
+                                   @RequestParam(name = "idPartido") Integer idPartido) throws PartidoException, GolException {
         return ControladorGoles.getInstancia().contarCantidadGoles(idClub, idPartido);
 
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getGoles")
-    public List<GolVO> getGoles() {
-        List<Gol> lista = ControladorGoles.getInstancia().getGoles();
-        List<GolVO> result = new ArrayList<>();
-        for (Gol gol : lista) {
-            result.add(gol.toVO());
-        }
+    public List<GolVO> getGoles() throws GolException {
+        return ControladorGoles.getInstancia().getGoles();
 
-        return result;
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getGolById")
-    public GolVO getGolById(@RequestParam(name = "idGol") Integer idGol) {
-        GolVO gol = ControladorGoles.getInstancia().getGolById(idGol).toVO();
-        if (gol != null)
-            return gol;
-        return new GolVO();
-    }
+    public GolVO getGolById(@RequestParam(name = "idGol") Integer idGol) throws GolException {
+        return ControladorGoles.getInstancia().getGolById(idGol);
 
+    }
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getGolesByPartido")
-    public List<GolVO> getGolesByPartido(@RequestParam(name = "idPartido") Integer idPartido) {
-        List<Gol> lista = ControladorGoles.getInstancia().getGolesByPartido(idPartido);
-        List<GolVO> result = new ArrayList<>();
-        for (Gol gol : lista) {
-            result.add(gol.toVO());
-        }
+    public List<GolVO> getGolesByPartido(@RequestParam(name = "idPartido") Integer idPartido) throws GolException {
+        return ControladorGoles.getInstancia().getGolesByPartido(idPartido);
 
-        return result;
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getGolesByPartidoAndClub")
     public List<GolVO> getGolesByPartidoAndClub(@RequestParam(name = "idPartido") Integer idPartido,
                                                 @RequestParam(name = "idClubAContar") Integer idClubAContar,
-                                                @RequestParam(name = "idClubRival") Integer idClubRival) {
-        List<Gol> lista = ControladorGoles.getInstancia().getGolesByPartidoAndClub(idPartido, idClubAContar, idClubRival);
-        List<GolVO> result = new ArrayList<>();
-        for (Gol gol : lista) {
-            result.add(gol.toVO());
-        }
+                                                @RequestParam(name = "idClubRival") Integer idClubRival) throws GolException {
+        return ControladorGoles.getInstancia().getGolesByPartidoAndClub(idPartido, idClubAContar, idClubRival);
 
-        return result;
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getGolesByPartidoAndSentido")
     public List<GolVO> getGolesByPartidoAndSentido(@RequestParam(name = "idPartido") Integer idPartido,
-                                                   @RequestParam(name = "sentido") String sentido) {
-        List<Gol> lista = ControladorGoles.getInstancia().getGolesByPartidoAndSentido(idPartido, sentido);
-        List<GolVO> result = new ArrayList<>();
-        for (Gol gol : lista) {
-            result.add(gol.toVO());
-        }
+                                                   @RequestParam(name = "sentido") String sentido) throws GolException {
+        return ControladorGoles.getInstancia().getGolesByPartidoAndSentido(idPartido, sentido);
 
-        return result;
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getGolesByJugadorAndPartido")
     public List<GolVO> getGolesByJugadorAndPartido(@RequestParam(name = "idPartido") Integer idPartido,
-                                                   @RequestParam(name = "idJugador") Integer idJugador) {
-        List<Gol> lista = ControladorGoles.getInstancia().getGolesByJugadorAndPartido(idPartido, idJugador);
-        List<GolVO> result = new ArrayList<>();
-        for (Gol gol : lista) {
-            result.add(gol.toVO());
-        }
+                                                   @RequestParam(name = "idJugador") Integer idJugador) throws GolException {
+        return ControladorGoles.getInstancia().getGolesByJugadorAndPartido(idPartido, idJugador);
 
-        return result;
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getGolesByJugador")
-    public List<GolVO> getGolesByJugador(@RequestParam(name = "idJugador") Integer idJugador) {
-        List<Gol> lista = ControladorGoles.getInstancia().getGolesByJugador(idJugador);
-        List<GolVO> result = new ArrayList<>();
-        for (Gol gol : lista) {
-            result.add(gol.toVO());
-        }
+    public List<GolVO> getGolesByJugador(@RequestParam(name = "idJugador") Integer idJugador) throws GolException {
+        return ControladorGoles.getInstancia().getGolesByJugador(idJugador);
 
-        return result;
     }
 
 

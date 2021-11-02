@@ -1,114 +1,78 @@
 package org.grupo4.campeonatosapirest.restcontroller;
 
-import org.grupocuatro.controlador.ControladorFaltas;
 import org.grupocuatro.controlador.ControladorMiembros;
-import org.grupocuatro.excepciones.MiembroException;
-import org.grupocuatro.modelo.Miembro;
+import org.grupocuatro.excepciones.*;
 import org.grupocuatro.vo.MiembroVO;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Objects;
 
 @RestController
 public class ControladorRestMiembros {
-
-    @PostMapping("/agregarJugadoresEnLista")
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/agregarJugadorEnLista")
     public void agregarJugadoresEnLista(@RequestParam(name = "idClub") Integer idClub,
                                         @RequestParam(name = "idPartido") Integer idPartido,
-                                        @RequestParam(name = "idJugador") Integer idJugador) {
-        ControladorMiembros.getInstancia().agregarJugadoresEnLista(idClub, idPartido, idJugador);
+                                        @RequestParam(name = "idJugador") Integer idJugador) throws FaltaException, ClubException, PartidoException, JugadorException, MiembroException {
+        ControladorMiembros.getInstancia().agregarJugadorEnLista(idClub, idPartido, idJugador);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/definirIngresoEgreso")
     public void definirIngresoEgreso(@RequestParam(name = "idMiembro") Integer idMiembro,
                                      @RequestParam(name = "ingreso") int ingreso,
-                                     @RequestParam(name = "egreso") int egreso) {
+                                     @RequestParam(name = "egreso") int egreso) throws MiembroException {
         ControladorMiembros.getInstancia().definirIngresoEgreso(idMiembro, ingreso, egreso);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getMiembros")
-    public List<MiembroVO> getMiembros() {
-        List<Miembro> lista = ControladorMiembros.getInstancia().getMiembros();
-        List<MiembroVO> result = new ArrayList<>();
+    public List<MiembroVO> getMiembros() throws MiembroException {
+        return ControladorMiembros.getInstancia().getMiembros();
 
-        if (lista != null) {
-            for (Miembro miembro : lista) {
-                result.add(miembro.toVO());
-            }
-        }
-
-        return result;
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getMiembroById")
     public MiembroVO getMiembroById(@RequestParam(name = "idMiembro") Integer idMiembro) throws MiembroException {
-        return ControladorMiembros.getInstancia().getMiembroById(idMiembro).toVO();
-    }
+        return ControladorMiembros.getInstancia().getMiembroById(idMiembro);
 
+    }
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getMiembrosByClub")
-    public List<MiembroVO> getMiembrosByClub(@RequestParam(name = "idClub") Integer idClub) {
-        List<Miembro> lista = ControladorMiembros.getInstancia().getMiembrosByClub(idClub);
-        List<MiembroVO> result = new ArrayList<>();
+    public List<MiembroVO> getMiembrosByClub(@RequestParam(name = "idClub") Integer idClub) throws MiembroException {
+        return ControladorMiembros.getInstancia().getMiembrosByClub(idClub);
 
-        if (lista != null) {
-            for (Miembro miembro : lista) {
-                result.add(miembro.toVO());
-            }
-        }
-
-        return result;
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getMiembrosByClubAndPartido")
     public List<MiembroVO> getMiembrosByClubAndPartido(@RequestParam(name = "idClub") Integer idClub,
-                                                       @RequestParam(name = "idPartido") Integer idPartido) {
-        List<Miembro> lista = ControladorMiembros.getInstancia().getMiembrosByClubAndPartido(idClub, idPartido);
-        List<MiembroVO> result = new ArrayList<>();
+                                                       @RequestParam(name = "idPartido") Integer idPartido) throws MiembroException {
+        return ControladorMiembros.getInstancia().getMiembrosByClubAndPartido(idClub, idPartido);
 
-        if (lista != null) {
-            for (Miembro miembro : lista) {
-                result.add(miembro.toVO());
-            }
-        }
-
-        return result;
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getMiembroByPartidoAndJugador")
     public MiembroVO getMiembroByPartidoAndJugador(@RequestParam(name = "idPartido") Integer idPartido,
-                                                   @RequestParam(name = "idJugador") Integer idJugador) {
+                                                   @RequestParam(name = "idJugador") Integer idJugador) throws MiembroException {
 
-        MiembroVO miembro = ControladorMiembros.getInstancia().getMiembroByPartidoAndJugador(idPartido, idJugador).toVO();
-
-        return Objects.requireNonNullElseGet(miembro, MiembroVO::new);
+        return ControladorMiembros.getInstancia().getMiembroByPartidoAndJugador(idPartido, idJugador);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getMiembroByClubAndPartidoAndJugador")
     public MiembroVO getMiembroByClubAndPartidoAndJugador(@RequestParam(name = "idClub") Integer idClub,
                                                           @RequestParam(name = "idPartido") Integer idPartido,
-                                                          @RequestParam(name = "idJugador") Integer idJugador) {
+                                                          @RequestParam(name = "idJugador") Integer idJugador) throws MiembroException {
+        return ControladorMiembros.getInstancia().getMiembroByClubAndPartidoAndJugador(idClub, idPartido, idJugador);
 
-        MiembroVO miembro = ControladorMiembros.getInstancia().getMiembroByClubAndPartidoAndJugador(idClub, idPartido, idJugador).toVO();
-        return Objects.requireNonNullElseGet(miembro, MiembroVO::new);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getMiembroByJugadorAndFecha")
     public List<MiembroVO> getMiembroByJugadorAndFecha(@RequestParam(name = "idJugador") Integer idJugador,
-                                                       @RequestParam(name = "fecha") LocalDate fecha) {
-        List<Miembro> lista = ControladorMiembros.getInstancia().getMiembroByJugadorAndFecha(idJugador, fecha);
-        List<MiembroVO> result = new ArrayList<>();
+                                                       @RequestParam(name = "fecha") String fechaString) throws MiembroException {
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/d");
+        LocalDate fecha = LocalDate.parse(fechaString, formato);
+        return ControladorMiembros.getInstancia().getMiembroByJugadorAndFecha(idJugador, fecha);
 
-        if (lista != null) {
-            for (Miembro miembro : lista) {
-                result.add(miembro.toVO());
-            }
-        }
-
-        return result;
     }
 
 }
