@@ -114,5 +114,12 @@ public class ControladorRestJugadores {
 
     }
 
+    @PostMapping("/modificarEstadoCampeonato")
+    public void modificarEstadoCampeonato (@RequestParam(name = "idJugador") int idJugador,
+                                           @RequestParam(name = "idCampeonato") int idCampeonato) throws CampeonatoException, JugadorException {
+        ControladorJugadores.getInstancia().modificarEstadoCampeonato(idJugador, idCampeonato);
+    }
+
+
 
 }
