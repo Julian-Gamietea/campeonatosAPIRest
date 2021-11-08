@@ -8,9 +8,14 @@ import org.springframework.web.bind.annotation.*;
 public class ControladorRestAdministradores {
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/crearJugador")
-    public void crearAdministrador() {
-
+    @PostMapping("/crearAdmin")
+    public void crearAdministrador(@RequestParam(name = "nombre") String nombre,
+                                   @RequestParam(name = "apellido") String apellido,
+                                   @RequestParam(name = "tipoDoc") String tipoDoc,
+                                   @RequestParam(name = "documento") Integer documento,
+                                   @RequestParam(name = "mail") String mail,
+                                   @RequestParam(name = "password") String password) throws AdministradorException {
+        ControladorAdministradores.getInstancia().crearAdministrador(nombre, apellido, tipoDoc, documento, mail, password);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
