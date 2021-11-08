@@ -36,14 +36,14 @@ public class ControladorRestJugadores {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/validarJugador")
-    public void validarJugador(@RequestParam(name = "mail") String mail,
+    @RequestMapping("/validarJugador")
+    public boolean validarJugador(@RequestParam(name = "mail") String mail,
                                @RequestParam(name = "password") String password) {
-        ControladorJugadores.getInstancia().validarJugador(mail, password);
+        return ControladorJugadores.getInstancia().validarJugador(mail, password);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/cambiarPassword")
+    @PostMapping("/cambiarPasswordJugador")
     public void cambiarPassword(@RequestParam(name = "idJugador") Integer idJugador,
                                 @RequestParam(name = "password") String password) throws JugadorException {
         ControladorJugadores.getInstancia().cambiarPassword(idJugador, password);

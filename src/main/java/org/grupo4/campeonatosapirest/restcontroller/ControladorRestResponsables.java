@@ -31,10 +31,10 @@ public class ControladorRestResponsables {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/validarResponsable")
-    public void validarResponsable(@RequestParam(name = "mail") String mail,
+    @RequestMapping("/validarResponsable")
+    public boolean validarResponsable(@RequestParam(name = "mail") String mail,
                                     @RequestParam(name = "password") String password) {
-        ControladorResponsables.getInstancia().validarResponsable(mail, password);
+        return ControladorResponsables.getInstancia().validarResponsable(mail, password);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
