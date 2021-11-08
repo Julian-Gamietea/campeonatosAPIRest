@@ -31,6 +31,13 @@ public class ControladorRestResponsables {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/validarResponsable")
+    public void validarResponsable(@RequestParam(name = "mail") String mail,
+                                    @RequestParam(name = "password") String password) {
+        ControladorResponsables.getInstancia().validarResponsable(mail, password);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/modificarPasswordResponsable")
     public void modificarPassword(@RequestParam(name = "idResponsable") Integer idResponsable,
                                   @RequestParam(name = "password") String password) throws ResponsableException {
