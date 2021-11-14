@@ -14,8 +14,10 @@ public class ControladorRestClubes {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/crearClub")
-    public void crearClub(@RequestBody ClubVO club) throws ClubException {
-        ControladorClubes.getInstancia().crearClub(club.getIdClub(), club.getNombre(), club.getDireccion());
+    public void crearClub(@RequestParam (name = "nombre")String nombre,
+                          @RequestParam (name = "direccion")String direccion,
+                          @RequestParam (name = "idClub")Integer id) throws ClubException {
+        ControladorClubes.getInstancia().crearClub(id, nombre, direccion);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
