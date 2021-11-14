@@ -6,7 +6,6 @@ import org.grupocuatro.excepciones.ResponsableException;
 import org.grupocuatro.vo.ResponsableVO;
 import org.springframework.web.bind.annotation.*;
 
-import javax.management.relation.RelationServiceNotRegisteredException;
 import java.util.List;
 
 @RestController
@@ -31,10 +30,10 @@ public class ControladorRestResponsables {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @RequestMapping("/validarResponsable")
-    public boolean validarResponsable(@RequestParam(name = "mail") String mail,
-                                    @RequestParam(name = "password") String password) {
-        return ControladorResponsables.getInstancia().validarResponsable(mail, password);
+    @RequestMapping("/loginResponsable")
+    public Integer loginResponsable(@RequestParam(name = "mail") String mail,
+                                    @RequestParam(name = "password") String password) throws ResponsableException {
+        return ControladorResponsables.getInstancia().loginResponsable(mail, password);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

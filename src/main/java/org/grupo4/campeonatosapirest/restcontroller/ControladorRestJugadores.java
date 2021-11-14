@@ -2,7 +2,6 @@ package org.grupo4.campeonatosapirest.restcontroller;
 
 import org.grupocuatro.controlador.ControladorJugadores;
 
-import org.grupocuatro.controlador.ControladorResponsables;
 import org.grupocuatro.excepciones.CampeonatoException;
 import org.grupocuatro.excepciones.ClubException;
 import org.grupocuatro.excepciones.JugadorException;
@@ -36,10 +35,10 @@ public class ControladorRestJugadores {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @RequestMapping("/validarJugador")
-    public boolean validarJugador(@RequestParam(name = "mail") String mail,
-                               @RequestParam(name = "password") String password) {
-        return ControladorJugadores.getInstancia().validarJugador(mail, password);
+    @RequestMapping("/loginJugador")
+    public Integer loginJugador(@RequestParam(name = "mail") String mail,
+                                @RequestParam(name = "password") String password) throws JugadorException {
+        return ControladorJugadores.getInstancia().loginJugador(mail, password);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

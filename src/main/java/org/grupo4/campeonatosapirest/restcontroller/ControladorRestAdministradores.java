@@ -19,10 +19,10 @@ public class ControladorRestAdministradores {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @RequestMapping("/validarAdministrador")
-    public boolean validarAdministrador(@RequestParam(name = "mail") String mail,
-                                     @RequestParam(name = "password") String password) {
-        return ControladorAdministradores.getInstancia().validarAdministrador(mail, password);
+    @RequestMapping("/loginAdministrador")
+    public Integer loginAdministrador(@RequestParam(name = "mail") String mail,
+                                      @RequestParam(name = "password") String password) throws AdministradorException {
+        return ControladorAdministradores.getInstancia().loginAdministrador(mail, password);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
