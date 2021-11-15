@@ -76,6 +76,43 @@ public class ControladorRestJugadores {
         ControladorJugadores.getInstancia().modificarEstado(idJugador);
     }
 
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/modificarNombre")
+    public void modificarNombre(@RequestParam(name = "idJugador") Integer idJugador,
+                                   @RequestParam(name = "nombre") String nombre) throws JugadorException {
+        ControladorJugadores.getInstancia().modificarNombre(idJugador, nombre);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/modificarApellido")
+    public void modificarApellido(@RequestParam(name = "idJugador") Integer idJugador,
+                                @RequestParam(name = "apellido") String apellido) throws JugadorException {
+        ControladorJugadores.getInstancia().modificarApellido(idJugador, apellido);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/modificarFechaNac")
+    public void modificarFechaNac(@RequestParam(name = "idJugador") Integer idJugador,
+                                @RequestParam(name = "fechaNac") LocalDate fechaNac) throws JugadorException {
+        ControladorJugadores.getInstancia().modificarFechaNac(idJugador, fechaNac);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/modificarDocumento")
+    public void modificarDocumento(@RequestParam(name = "idJugador") Integer idJugador,
+                                  @RequestParam(name = "documento") int documento) throws JugadorException {
+        ControladorJugadores.getInstancia().modificarDocumento(idJugador, documento);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/modificarTipoDocumento")
+    public void modificarTipoDocumento(@RequestParam(name = "idJugador") Integer idJugador,
+                                   @RequestParam(name = "tipo") String tipodoc) throws JugadorException {
+        ControladorJugadores.getInstancia().modificarTipoDocumento(idJugador, tipodoc);
+    }
+
+
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/encontrarJugador")
     public JugadorVO encontrarJugador(@RequestParam(name = "idJugador") Integer idJugador) throws JugadorException {
