@@ -1,6 +1,8 @@
 package org.grupo4.campeonatosapirest.restcontroller;
 
 import org.grupocuatro.controlador.ControladorTablasPosiciones;
+import org.grupocuatro.excepciones.ClubesCampeonatoException;
+import org.grupocuatro.excepciones.PartidoException;
 import org.grupocuatro.excepciones.TablaPosicionException;
 import org.grupocuatro.vo.TablaPosicionesVO;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,6 +39,12 @@ public class ControladorRestTablasPosiciones {
     public List<TablaPosicionesVO> getTablaPosicionesByPuntos(@RequestParam(name = "puntos") int puntos) throws TablaPosicionException {
         return ControladorTablasPosiciones.getInstancia().getTablaPosicionesByPuntos(puntos);
 
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/getTablaPosicionesByZona")
+    public List<List<TablaPosicionesVO>> getTablaPosicionesByZona (@RequestParam (name = "idCampeonato") Integer idCampeonato) throws ClubesCampeonatoException, PartidoException, TablaPosicionException {
+        return ControladorTablasPosiciones.getInstancia().getTablaPosicionesPorZona(idCampeonato);
     }
 
 

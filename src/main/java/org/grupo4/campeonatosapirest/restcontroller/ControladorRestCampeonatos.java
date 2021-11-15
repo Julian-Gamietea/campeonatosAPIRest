@@ -77,4 +77,11 @@ public class ControladorRestCampeonatos {
         return ControladorCampeonatos.getInstancia().getCampeonatosByClub(idClub);
 
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/getCampeonatosADefinir")
+    public List<CampeonatoVO> getCampeonatosADefinir () throws CampeonatoException {
+        return ControladorCampeonatos.getInstancia().campeonatosADefinir();
+    }
+
 }
