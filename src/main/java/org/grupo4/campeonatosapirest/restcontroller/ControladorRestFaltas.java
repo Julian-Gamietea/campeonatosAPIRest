@@ -75,7 +75,7 @@ public class ControladorRestFaltas {
 
         return ControladorFaltas.getInstancia().getFaltasByJugadorAndTipoAndPartido(idJugador, tipo, idPartido);
 
-    }
+    }/*/
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getFaltasByJugador")
     public List<FaltaVO> getFaltasByJugador(@RequestParam(name = "idJugador") Integer idJugador) throws FaltaException {
@@ -88,7 +88,7 @@ public class ControladorRestFaltas {
         return ControladorFaltas.getInstancia().getFaltasByTipo(tipo);
 
     }
-
+/*/
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getFaltasByClubAndPartido")
     public List<FaltaVO> getFaltasByClubAndPartido(@RequestParam(name = "idClub") Integer idClub,
