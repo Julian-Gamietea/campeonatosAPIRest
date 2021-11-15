@@ -95,6 +95,11 @@ public class ControladorRestPartidos {
         return ControladorPartidos.getInstancia().getPartidosByClubLocal(idClub);
     }
     @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/getPartidosByClub")
+    public List<PartidoVO> getPartidosByClub(@RequestParam(name = "idClub") Integer idClub) throws PartidoException {
+        return ControladorPartidos.getInstancia().getPartidosByClub(idClub);
+    }
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getPartidosByClubVisitante")
     public List<PartidoVO> getPartidosByClubVisitante(@RequestParam(name = "idClub") Integer idClub) throws PartidoException {
         return ControladorPartidos.getInstancia().getPartidosByClubVisitante(idClub);
