@@ -77,5 +77,11 @@ public class ControladorRestMiembros {
         return ControladorMiembros.getInstancia().getMiembroByJugadorAndFecha(idJugador, fecha);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/getMiembroByPartido")
+    public List<MiembroVO> getMiembroByPartido(@RequestParam(name = "idPartido") Integer idPartido) throws MiembroException {
+        return ControladorMiembros.getInstancia().getMiembroByPartido(idPartido);
+    }
+
 }
 
