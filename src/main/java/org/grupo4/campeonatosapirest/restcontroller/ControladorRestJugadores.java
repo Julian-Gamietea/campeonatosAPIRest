@@ -183,7 +183,7 @@ public class ControladorRestJugadores {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/existeMailJugador")
+    @RequestMapping("/existeMailJugador")
     public boolean existeMailJugador(@RequestParam(name = "mail") String mail) {
         return ControladorJugadores.getInstancia().existeMailJugador(mail);
     }
