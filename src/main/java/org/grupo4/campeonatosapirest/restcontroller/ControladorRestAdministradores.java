@@ -32,4 +32,10 @@ public class ControladorRestAdministradores {
         ControladorAdministradores.getInstancia().cambiarPassword(idAdmin, password);
     }
 
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/existeMailAdministrador")
+    public boolean existeMailAdministrador(@RequestParam(name = "mail") String mail) {
+        return ControladorAdministradores.getInstancia().existeMailAdministrador(mail);
+    }
 }

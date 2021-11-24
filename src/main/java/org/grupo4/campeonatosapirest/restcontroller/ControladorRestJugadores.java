@@ -182,5 +182,11 @@ public class ControladorRestJugadores {
         ControladorJugadores.getInstancia().modificarEstadoCampeonato(idJugador, idCampeonato);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/existeMailJugador")
+    public boolean existeMailJugador(@RequestParam(name = "mail") String mail) {
+        return ControladorJugadores.getInstancia().existeMailJugador(mail);
+    }
+
 
 }
