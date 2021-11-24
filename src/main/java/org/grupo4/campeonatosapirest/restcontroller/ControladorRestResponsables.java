@@ -25,8 +25,10 @@ public class ControladorRestResponsables {
     @PostMapping("/modificarResponsable")
     public void modificarResponsable(@RequestParam(name = "legajo") Integer legajo,
                                      @RequestParam(name = "nombre") String nombre,
-                                     @RequestParam(name = "idClub") Integer idClub) throws ClubException, ResponsableException {
-        ControladorResponsables.getInstancia().modificarResponsable(legajo, nombre, idClub);
+                                     @RequestParam(name = "idClub") Integer idClub,
+                                     @RequestParam(name = "mail") String mail,
+                                     @RequestParam(name = "password") String password) throws ClubException, ResponsableException {
+        ControladorResponsables.getInstancia().modificarResponsable(legajo, nombre, idClub, mail, password);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
