@@ -12,6 +12,7 @@ import org.grupocuatro.vo.ClubVO;
 import org.grupocuatro.vo.PartidoVO;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Part;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -135,6 +136,11 @@ public class ControladorRestPartidos {
         return ControladorPartidos.getInstancia().getPartidosByCampeonato(idCampeonato);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/getPartidosNoCargados")
+    public List<PartidoVO> getPartidoNoCargados() throws PartidoException {
+        return ControladorPartidos.getInstancia().getPartidosNoCargados();
+    }
 
 }
 
