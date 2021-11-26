@@ -2,6 +2,7 @@ package org.grupo4.campeonatosapirest.restcontroller;
 
 import org.grupocuatro.controlador.ControladorJugadores;
 
+import org.grupocuatro.controlador.ControladorResponsables;
 import org.grupocuatro.excepciones.*;
 import org.grupocuatro.vo.JugadorCampeonatoVO;
 import org.grupocuatro.vo.JugadorVO;
@@ -193,5 +194,16 @@ public class ControladorRestJugadores {
         return ControladorJugadores.getInstancia().getJugadoresWithEstadoCampeonato(idCampeonto, idClub);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/existeTelefonoJugador")
+    public boolean existeTelefonoJugador(@RequestParam(name = "telefono") String telefono) {
+        return ControladorJugadores.getInstancia().existeTelefonoJugador(telefono);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/existeDocumentoJugador")
+    public boolean existeDocumentoJugador(@RequestParam(name = "documento") Integer documento) {
+        return ControladorJugadores.getInstancia().existeDocumentoJugador(documento);
+    }
 
 }

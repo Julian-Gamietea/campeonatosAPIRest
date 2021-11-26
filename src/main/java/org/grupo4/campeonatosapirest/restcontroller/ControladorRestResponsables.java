@@ -80,4 +80,10 @@ public class ControladorRestResponsables {
         return ControladorResponsables.getInstancia().existeMailResponsable(mail);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/existeDocumentoResponsable")
+    public boolean existeDocumentoResponsable(@RequestParam(name = "documento") Integer documento) {
+        return ControladorResponsables.getInstancia().existeDocumentoResponsable(documento);
+    }
+
 }
