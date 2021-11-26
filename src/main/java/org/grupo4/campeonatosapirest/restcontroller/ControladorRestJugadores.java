@@ -2,10 +2,8 @@ package org.grupo4.campeonatosapirest.restcontroller;
 
 import org.grupocuatro.controlador.ControladorJugadores;
 
-import org.grupocuatro.excepciones.CampeonatoException;
-import org.grupocuatro.excepciones.ClubException;
-import org.grupocuatro.excepciones.JugadorException;
-import org.grupocuatro.excepciones.PartidoException;
+import org.grupocuatro.excepciones.*;
+import org.grupocuatro.vo.JugadorCampeonatoVO;
 import org.grupocuatro.vo.JugadorVO;
 import org.grupocuatro.vo.StatsVO;
 import org.springframework.web.bind.annotation.*;
@@ -186,6 +184,13 @@ public class ControladorRestJugadores {
     @RequestMapping("/existeMailJugador")
     public boolean existeMailJugador(@RequestParam(name = "mail") String mail) {
         return ControladorJugadores.getInstancia().existeMailJugador(mail);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/getJugadoresWithEstadoCampeonato")
+    public List<JugadorCampeonatoVO> getJugadoresWithEstado(@RequestParam(name = "idClub") Integer idClub,
+                                                            @RequestParam(name = "idCampeonato") Integer idCampeonto) throws JugadorException {
+        return ControladorJugadores.getInstancia().getJugadoresWithEstadoCampeonato(idCampeonto, idClub);
     }
 
 
