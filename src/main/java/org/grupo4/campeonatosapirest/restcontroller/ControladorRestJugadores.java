@@ -153,10 +153,11 @@ public class ControladorRestJugadores {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @RequestMapping("/getJugadoresHabilitadosByClubAndCategoria")
-    public List<JugadorVO> getJugadoresHabilitadosByClubAndCategoria(@RequestParam(name = "idClub") Integer idClub,
-                                                                     @RequestParam(name = "categoria") int categoria) throws JugadorException {
-        return ControladorJugadores.getInstancia().getJugadoresHabilitadosCategoriaClub(idClub, categoria);
+    @RequestMapping("/getJugadoresHabilitadosByClubAndCategoriaAndCampeonato")
+    public List<JugadorVO> getJugadoresHabilitadosByClubAndCategoriaAndCampeonato(@RequestParam(name = "idClub") Integer idClub,
+                                                                                  @RequestParam(name = "categoria") int categoria,
+                                                                                  @RequestParam(name = "idCampeonato") Integer idCampeonato) throws JugadorException {
+        return ControladorJugadores.getInstancia().getJugadoresHabilitadosCategoriaClubAndCampeoanto(idClub, categoria, idCampeonato);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
