@@ -2,10 +2,9 @@ package org.grupo4.campeonatosapirest.restcontroller;
 
 import org.grupocuatro.controlador.ControladorJugadores;
 
-import org.grupocuatro.excepciones.CampeonatoException;
-import org.grupocuatro.excepciones.ClubException;
-import org.grupocuatro.excepciones.JugadorException;
-import org.grupocuatro.excepciones.PartidoException;
+import org.grupocuatro.controlador.ControladorResponsables;
+import org.grupocuatro.excepciones.*;
+import org.grupocuatro.vo.JugadorCampeonatoVO;
 import org.grupocuatro.vo.JugadorVO;
 import org.grupocuatro.vo.StatsVO;
 import org.springframework.web.bind.annotation.*;
@@ -189,5 +188,23 @@ public class ControladorRestJugadores {
         return ControladorJugadores.getInstancia().existeMailJugador(mail);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/getJugadoresWithEstadoCampeonato")
+    public List<JugadorCampeonatoVO> getJugadoresWithEstado(@RequestParam(name = "idClub") Integer idClub,
+                                                            @RequestParam(name = "idCampeonato") Integer idCampeonto) throws JugadorException {
+        return ControladorJugadores.getInstancia().getJugadoresWithEstadoCampeonato(idCampeonto, idClub);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/existeTelefonoJugador")
+    public boolean existeTelefonoJugador(@RequestParam(name = "telefono") String telefono) {
+        return ControladorJugadores.getInstancia().existeTelefonoJugador(telefono);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/existeDocumentoJugador")
+    public boolean existeDocumentoJugador(@RequestParam(name = "documento") Integer documento) {
+        return ControladorJugadores.getInstancia().existeDocumentoJugador(documento);
+    }
 
 }
