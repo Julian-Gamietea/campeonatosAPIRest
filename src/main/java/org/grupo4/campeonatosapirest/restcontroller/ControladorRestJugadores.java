@@ -92,8 +92,10 @@ public class ControladorRestJugadores {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/modificarFechaNac")
     public void modificarFechaNac(@RequestParam(name = "idJugador") Integer idJugador,
-                                @RequestParam(name = "fechaNac") LocalDate fechaNac) throws JugadorException {
-        ControladorJugadores.getInstancia().modificarFechaNac(idJugador, fechaNac);
+                                @RequestParam(name = "fechaNac") String fechaNac) throws JugadorException {
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        LocalDate fechaNacFinal = LocalDate.parse(fechaNac, formato);
+        ControladorJugadores.getInstancia().modificarFechaNac(idJugador, fechaNacFinal);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
