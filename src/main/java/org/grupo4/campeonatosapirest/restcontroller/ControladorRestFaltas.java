@@ -75,20 +75,20 @@ public class ControladorRestFaltas {
 
         return ControladorFaltas.getInstancia().getFaltasByJugadorAndTipoAndPartido(idJugador, tipo, idPartido);
 
-    }/*/
-    @CrossOrigin(origins = "http://localhost:3000")
-    @RequestMapping("/getFaltasByJugador")
-    public List<FaltaVO> getFaltasByJugador(@RequestParam(name = "idJugador") Integer idJugador) throws FaltaException {
-        return ControladorFaltas.getInstancia().getFaltasByJugador(idJugador);
-
     }
-    @CrossOrigin(origins = "http://localhost:3000")
-    @RequestMapping("/getFaltasByTipo")
-    public List<FaltaVO> getFaltasByTipo(@RequestParam(name = "tipo") String tipo) throws FaltaException {
-        return ControladorFaltas.getInstancia().getFaltasByTipo(tipo);
+//    @CrossOrigin(origins = "http://localhost:3000")
+//    @RequestMapping("/getFaltasByJugador")
+//    public List<FaltaVO> getFaltasByJugador(@RequestParam(name = "idJugador") Integer idJugador) throws FaltaException {
+//        return ControladorFaltas.getInstancia().getFaltasByJugador(idJugador);
+//
+//    }
+//    @CrossOrigin(origins = "http://localhost:3000")
+//    @RequestMapping("/getFaltasByTipo")
+//    public List<FaltaVO> getFaltasByTipo(@RequestParam(name = "tipo") String tipo) throws FaltaException {
+//        return ControladorFaltas.getInstancia().getFaltasByTipo(tipo);
+//
+//    }
 
-    }
-/*/
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getFaltasByClubAndPartido")
     public List<FaltaVO> getFaltasByClubAndPartido(@RequestParam(name = "idClub") Integer idClub,
