@@ -144,6 +144,18 @@ public class ControladorRestPartidos {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/getUltimoNroFechaByCampeonato")
+    public Integer getUltimoNroFechaByCampeonato(@RequestParam(name = "idCampeonato") Integer campeonato) throws PartidoException {
+        return ControladorPartidos.getInstancia().getUltimoNroFechaByCampeonato(campeonato);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/getLimitesDeFechasByCampeonato")
+    public String getLimitesDeFechasByCampeonato(@RequestParam(name = "idCampeonato") Integer idCampeonato) throws PartidoException, CampeonatoException {
+        return ControladorPartidos.getInstancia().getLimitesDeFechasByCampeonato(idCampeonato);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getPartidosNoCargados")
     public List<PartidoVO> getPartidoNoCargados() throws PartidoException {
         return ControladorPartidos.getInstancia().getPartidosNoCargados();

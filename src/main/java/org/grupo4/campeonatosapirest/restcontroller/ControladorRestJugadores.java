@@ -2,7 +2,6 @@ package org.grupo4.campeonatosapirest.restcontroller;
 
 import org.grupocuatro.controlador.ControladorJugadores;
 
-import org.grupocuatro.controlador.ControladorResponsables;
 import org.grupocuatro.excepciones.*;
 import org.grupocuatro.vo.JugadorCampeonatoVO;
 import org.grupocuatro.vo.JugadorVO;
@@ -156,7 +155,7 @@ public class ControladorRestJugadores {
     public List<JugadorVO> getJugadoresHabilitadosByClubAndCategoriaAndCampeonato(@RequestParam(name = "idClub") Integer idClub,
                                                                                   @RequestParam(name = "categoria") int categoria,
                                                                                   @RequestParam(name = "idCampeonato") Integer idCampeonato) throws JugadorException {
-        return ControladorJugadores.getInstancia().getJugadoresHabilitadosCategoriaClubAndCampeoanto(idClub, categoria, idCampeonato);
+        return ControladorJugadores.getInstancia().getJugadoresHabilitadosCategoriaClubAndCampeonato(idClub, categoria, idCampeonato);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

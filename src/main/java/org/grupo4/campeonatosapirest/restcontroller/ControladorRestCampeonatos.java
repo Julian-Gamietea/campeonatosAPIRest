@@ -80,4 +80,10 @@ public class ControladorRestCampeonatos {
         return ControladorCampeonatos.getInstancia().campeonatosADefinir();
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/getCategoriaCampeonato")
+    public int getCategoriaCampeonato(@RequestParam(name = "idCampeonato") Integer idCampeonato) throws PartidoException {
+        return ControladorCampeonatos.getInstancia().getCategoriaCampeonato(idCampeonato);
+    }
+
 }
