@@ -52,11 +52,18 @@ public class ControladorRestPartidos {
                                    @RequestParam(name = "idPartido") Integer idPartido) throws CampeonatoException, ClubException, PartidoException, TablaPosicionException {
         ControladorPartidos.getInstancia().validadoPorClubLocal(idClub, idPartido);
     }
+
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/validadoByClubVisitante")
     public void validarByClubVisitante(@RequestParam(name = "idClub") Integer idClub,
                                        @RequestParam(name = "idPartido") Integer idPartido) throws PartidoException, CampeonatoException, ClubException, TablaPosicionException {
         ControladorPartidos.getInstancia().validadoPorClubVisitante(idClub, idPartido);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/invalidarPartido")
+    public void invalidarPartido(@RequestParam(name = "idPartido") Integer idPartido) throws FaltaException, GolException, PartidoException, MiembroException {
+        ControladorPartidos.getInstancia().invalidarPartido(idPartido);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
