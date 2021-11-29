@@ -78,37 +78,39 @@ public class ControladorRestJugadores {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/modificarNombre")
     public void modificarNombre(@RequestParam(name = "idJugador") Integer idJugador,
-                                   @RequestParam(name = "nombre") String nombre) throws JugadorException {
+                                @RequestParam(name = "nombre") String nombre) throws JugadorException {
         ControladorJugadores.getInstancia().modificarNombre(idJugador, nombre);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/modificarApellido")
     public void modificarApellido(@RequestParam(name = "idJugador") Integer idJugador,
-                                @RequestParam(name = "apellido") String apellido) throws JugadorException {
+                                  @RequestParam(name = "apellido") String apellido) throws JugadorException {
         ControladorJugadores.getInstancia().modificarApellido(idJugador, apellido);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/modificarFechaNac")
     public void modificarFechaNac(@RequestParam(name = "idJugador") Integer idJugador,
-                                @RequestParam(name = "fechaNac") String fechaNac) throws JugadorException {
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("d/MM/yyyy");
+                                  @RequestParam(name = "fechaNac") String fechaNac) throws JugadorException {
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/d");
         LocalDate fechaNacFinal = LocalDate.parse(fechaNac, formato);
         ControladorJugadores.getInstancia().modificarFechaNac(idJugador, fechaNacFinal);
+
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/modificarDocumento")
     public void modificarDocumento(@RequestParam(name = "idJugador") Integer idJugador,
-                                  @RequestParam(name = "documento") int documento) throws JugadorException {
-        ControladorJugadores.getInstancia().modificarDocumento(idJugador, documento);
+                                   @RequestParam(name = "documento") int documento,
+                                   @RequestParam(name = "tipoDoc") String tipoDoc) throws JugadorException {
+        ControladorJugadores.getInstancia().modificarDocumento(idJugador, documento, tipoDoc);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/modificarTipoDocumento")
     public void modificarTipoDocumento(@RequestParam(name = "idJugador") Integer idJugador,
-                                   @RequestParam(name = "tipo") String tipodoc) throws JugadorException {
+                                       @RequestParam(name = "tipo") String tipodoc) throws JugadorException {
         ControladorJugadores.getInstancia().modificarTipoDocumento(idJugador, tipodoc);
     }
 
